@@ -1,0 +1,6 @@
+hiredis
+redis
+django-redis
+newrelic
+gunicorn
+--requirement REQUIREMENTS

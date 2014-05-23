@@ -1,0 +1,17 @@
+https://github.com/django/django/zipball/stable/1.7.x
+django-mptt
+https://github.com/feincms/feincms/zipball/next
+Pillow
+django-robots
+django-pipeline
+cssmin
+django-debug-toolbar
+pytz
+raven
+django-admin-sso
+psycopg2
+dj-database-url
+https://github.com/allink/allink-essentials/zipball/master
+mailchimp
+django-dotenv
+django-getenv

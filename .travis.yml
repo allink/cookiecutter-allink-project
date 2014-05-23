@@ -1,0 +1,25 @@
+language: python
+python:
+  - "2.7"
+services:
+  - redis-server
+addons:
+  postgresql: "9.3"
+env:
+  - DJANGO_SETTINGS_MODULE="{{ cookiecutter.project_name }}.settings.travis"
+install:
+  - pip install -r REQUIREMENTS_SERVER --use-mirrors
+  - pip install flake8 --ignore-installed
+  - npm install jshint -g
+  - npm install less@">=1.5.0 <1.6.0" -g
+before_script:
+  - psql -c 'create database travisci;' -U postgres
+  - python manage.py migrate --noinput
+script:
+  # - python manage.py test {{ cookiecutter.project_name }}
+  - ./pre-commit --all-files
+cache:
+  directories:
+    - /home/travis/virtualenv/python2.7/lib/python2.7/site-packages
+addons:
+  postgresql: "9.3"

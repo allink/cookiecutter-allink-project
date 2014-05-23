@@ -1,0 +1,288 @@
+import os
+from getenv import env
+
+# ===================
+# = Global Settings =
+# ===================
+
+ADMINS = (
+    ('itcrowd', 'itcrowd@allink.ch'),
+)
+SECRET_KEY = env('SECRET_KEY', '{{ secret_key }}')
+ALLOWED_HOSTS = ["*"]
+LANGUAGE_CODE = 'de'
+LANGUAGES = (
+    ('de', 'German'),
+    ('en', 'English'),
+    # ('fr', 'French'),
+)
+TIME_ZONE = 'Europe/Zurich'
+SITE_ID = 1
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+ATOMIC_REQUESTS = True
+
+# ===========================
+# = Directory Declaractions =
+# ===========================
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+ROOT_URLCONF = '{{ cookiecutter.project_name }}.urls'
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+# ================
+# = File serving =
+# ================
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, '{{ cookiecutter.project_name }}', 'static'),
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+STATIC_URL = '/static/'
+
+DEFAULT_FILE_STORAGE = 'allink_essentials.storage.lossless_image_compress_storage.LosslessImageCompressStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+# ===========================
+# = Django-specific Modules =
+# ===========================
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'pipeline.middleware.MinifyHTMLMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    # 'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+)
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+# =============
+# = Templates =
+# =============
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, '{{ cookiecutter.project_name }}', 'templates'),
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
+
+# ===============
+# = Django Apps =
+# ===============
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.sitemaps',
+    'feincms',
+    'feincms.module.page',
+    'feincms.module.medialibrary',
+    'allink_essentials',
+    'allink_essentials.in_footer',
+    'pipeline',
+    'mptt',
+    'robots',
+    'allink_essentials.analytics',
+    'debug_toolbar',
+    'raven.contrib.django',
+    'admin_sso',
+    # 'djcelery',
+    '{{ cookiecutter.project_name }}',
+)
+
+MIGRATION_MODULES = {
+    'page': '{{ cookiecutter.project_name }}.migrations_page',
+}
+
+# ===========
+# = Logging =
+# ===========
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'skip_unreadable_posts': {
+            '()': 'allink_essentials.logging.filters.SkipUnreadablePostError',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'raven.contrib.django.handlers.SentryHandler',
+            'filters': ['require_debug_false', 'skip_unreadable_posts'],
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    }
+}
+
+# ====================
+# = FeinCMS settings =
+# ====================
+
+FEINCMS_ADMIN_MEDIA = '/static/feincms/'
+FEINCMS_TINYMCE_INIT_CONTEXT = {
+    'TINYMCE_JS_URL': os.path.join(STATIC_URL, 'lib/tiny_mce/tiny_mce.js'),
+    'TINYMCE_CONTENT_CSS_URL': os.path.join(STATIC_URL, 'stylesheets/tiny_mce.css'),
+    'TINYMCE_LINK_LIST_URL': '/admin/tiny_mce_links.js',
+    'TINYMCE_EXTERNAL_IMAGE_LIST_URL': None
+}
+FEINCMS_RICHTEXT_INIT_CONTEXT = FEINCMS_TINYMCE_INIT_CONTEXT
+FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
+
+# =====================
+# = Pipeline settings =
+# =====================
+
+PIPELINE_CSS = {
+    'main': {
+        'source_filenames': (
+            'lib/bootstrap-3.1.1/less/bootstrap.less',
+            'stylesheets/base.less',
+            'stylesheets/layout.less',
+        ),
+        'output_filename': 'css/main.css',
+        'variant': 'datauri',
+    },
+}
+
+PIPELINE_JS = {
+    'main': {
+        'source_filenames': (
+            'lib/jquery-1.11.0.js',
+            'lib/jquery.sticky.js',
+            'lib/bootstrap-3.1.1/js/transition.js'
+            'lib/bootstrap-3.1.1/js/dropdown.js'
+            'lib/bootstrap-3.1.1/js/collapse.js'
+            'javascript/main.js',
+        ),
+        'output_filename': 'js/main.js',
+    },
+    'ie9': {
+        'source_filenames': (
+            'lib/jquery.placeholder.js',
+            'javascript/ie9.js',
+        ),
+        'output_filename': 'js/ie9.js',
+    }
+}
+
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.less.LessCompiler',
+)
+
+PIPELINE_LESS_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'lessc')
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
+PIPELINE_CSSMIN_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'cssmin')
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
+PIPELINE_UGLIFYJS_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'uglifyjs')
+
+# ==========
+# = Celery =
+# ==========
+
+CELERYBEAT_SCHEDULE = {
+    # 'eaxample-print': {
+    #     'task': 'tasks.print',
+    #     'schedule': timedelta(seconds=30)
+    # },
+}
+
+# ==========================
+# = Miscellaneous Settings =
+# ==========================
+
+GOOGLE_ANALYTICS_ID = ""
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+import re
+IGNORABLE_404_URLS = (
+    re.compile(r'^/cgi-bin/'),
+    re.compile(r'\.php$'),
+    re.compile(r'\.pl$'),
+    re.compile(r'\.cgi$'),
+)
+GOOGLE_ANALYTICS_ID = ""
+
+AUTHENTICATION_BACKENDS = (
+    'admin_sso.auth.DjangoSSOAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
