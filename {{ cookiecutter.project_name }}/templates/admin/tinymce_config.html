@@ -1,4 +1,4 @@
-{% extends "admin/content/richtext/init_tinymce.html" %}
+{% raw %}{% extends "admin/content/richtext/init_tinymce.html" %}
 {% block buttons1 %}formatselect,|,bold,italic,|,bullist,numlist,|,link,unlink,|,pasteword,code{% endblock %}
 {% block settings %}
 {{block.super}},
@@ -21,4 +21,4 @@
 
 {% endblock settings %}
 {% block plugins %}{{ block.super }},template,paste{% endblock %}
-{% block blockformats %}p,h2{% endblock %}
+{% block blockformats %}p,h2{% endblock %}{% endraw %}

@@ -1,8 +1,0 @@
-{% extends "admin/content/richtext/init_tinymce.html" %}
-{% block settings %}
-    convert_urls : false,
-    entity_encoding : "raw",
-    {{block.super}}
-{% endblock %}
-{% block buttons1 %}fullscreen,|,formatselect,|,bold,italic,|,link,unlink,|,code{% endblock %}
-{% comment %}{% block blockformats %}p,h2{% endblock %}{% endcomment %}

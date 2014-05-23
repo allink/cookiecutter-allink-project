@@ -1,4 +1,4 @@
-{% load i18n %}
+{% raw %}{% load i18n %}
 <form action="" method="post" id="mailchimp-form" role="form">
     {% csrf_token %}
     <div class="input-group large">
@@ -8,4 +8,4 @@
             <button type="submit" class="btn btn-default btn-light" type="button"><span class="icomoon-caret-right"></span>{% trans "Anmelden" %}</button>
         </span>
     </div>
-</form>
+</form>{% endraw %}
