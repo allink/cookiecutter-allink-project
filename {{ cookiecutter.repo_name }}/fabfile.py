@@ -1,4 +1,4 @@
-project_python = '{{ cookiecutter.{{ cookiecutter.project_name }} }}'
+project_python = '{{ cookiecutter.project_name }}'
 
 try:
     from allink_essentials.fabfiles.proxima_class_fabfile import *  # noqa
