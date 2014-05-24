@@ -1,5 +1,4 @@
 from .default import *  # noqa
-import dj_database_url
 from getenv import env
 
 # ##############################################################################
@@ -19,8 +18,6 @@ TEMPLATE_DEBUG = DEBUG
 # ===================
 
 DATABASES['default']['CONN_MAX_AGE'] = 60
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 RAVEN_CONFIG = {
     'dsn': '',

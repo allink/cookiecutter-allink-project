@@ -1,5 +1,7 @@
 import os
 from getenv import env
+import dj_database_url
+import django_cache_url
 
 # ===================
 # = Global Settings =
@@ -23,14 +25,20 @@ USE_L10N = True
 USE_TZ = True
 ATOMIC_REQUESTS = True
 
-# ========================
-# = Databases and Caches =
-# ========================
+# ===============================
+# = Databases, Caches, Sessions =
+# ===============================
 
 DATABASES = {'default': dj_database_url.config()}
 
-CACHES = {'default': django_cache_url.config()}
+CACHES = {
+    'default': django_cache_url.config(),
+    'sessions': django_cache_url.config(env="SESSION_CACHE_URL"),
+}
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_COOKIE_HTTPONLY = True
 
 # ===========================
 # = Directory Declaractions =
@@ -280,7 +288,6 @@ CELERYBEAT_SCHEDULE = {
 # ==========================
 
 GOOGLE_ANALYTICS_ID = ""
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 import re
 IGNORABLE_404_URLS = (
