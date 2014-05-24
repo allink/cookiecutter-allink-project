@@ -23,6 +23,15 @@ USE_L10N = True
 USE_TZ = True
 ATOMIC_REQUESTS = True
 
+# ========================
+# = Databases and Caches =
+# ========================
+
+DATABASES = {'default': dj_database_url.config()}
+
+CACHES = {'default': django_cache_url.config()}
+
+
 # ===========================
 # = Directory Declaractions =
 # ===========================

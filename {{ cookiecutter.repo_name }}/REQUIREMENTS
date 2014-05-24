@@ -10,8 +10,9 @@ pytz
 raven
 django-admin-sso
 psycopg2
-dj-database-url
 https://github.com/allink/allink-essentials/zipball/master
 mailchimp
+dj-database-url
+django-cache-url
 django-dotenv
 django-getenv

@@ -18,21 +18,7 @@ TEMPLATE_DEBUG = DEBUG
 # = Server Settings =
 # ===================
 
-DATABASES = {'default': dj_database_url.config()}
 DATABASES['default']['CONN_MAX_AGE'] = 60
-
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379:1',
-        'KEY_PREFIX': UNIQUE_PREFIX,
-        'VERSION': 1,
-        'OPTIONS': {
-            'PARSER_CLASS': 'redis.connection.HiredisParser',
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
-        },
-    },
-}
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
