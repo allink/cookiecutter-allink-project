@@ -1,5 +1,4 @@
 from .default import *  # noqa
-from getenv import env
 
 # ##############################################################################
 # remove before flight
@@ -35,18 +34,3 @@ TEMPLATE_LOADERS = (
 # ===========================
 
 MIDDLEWARE_CLASSES += ('allink_essentials.middleware.validate_host_middleware.ValidateHostMiddleware',)
-
-# ==========
-# = Celery =
-# ==========
-
-BROKER_URL = env('BROKER_URL', None)
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', "redis://localhost/0")
-CELERYD_CONCURRENCY = env('CELERYD_CONCURRENCY', 1)
-CELERY_SEND_EVENTS = False
-CELERY_ENABLE_UTC = True
-
-# load celery
-if BROKER_URL:
-    import djcelery
-    djcelery.setup_loader()

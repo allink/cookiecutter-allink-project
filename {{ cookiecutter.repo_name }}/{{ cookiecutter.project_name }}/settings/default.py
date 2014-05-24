@@ -283,6 +283,12 @@ CELERYBEAT_SCHEDULE = {
     # },
 }
 
+BROKER_URL = env('BROKER_URL', None)
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', None)
+CELERYD_CONCURRENCY = env('CELERYD_CONCURRENCY', 1)
+CELERY_SEND_EVENTS = False
+CELERY_ENABLE_UTC = True
+
 # ==========================
 # = Miscellaneous Settings =
 # ==========================
@@ -296,6 +302,7 @@ IGNORABLE_404_URLS = (
     re.compile(r'\.pl$'),
     re.compile(r'\.cgi$'),
 )
+
 GOOGLE_ANALYTICS_ID = ""
 
 AUTHENTICATION_BACKENDS = (
