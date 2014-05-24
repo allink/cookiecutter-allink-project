@@ -11,7 +11,18 @@ else:
     env.project_python = project_python
 
     def production():
-        _setup_path('production')
+        env.unique_identifier = '{{ cookiecutter.project_name }}_production'
+        env.git_repository = 'git@github.com:{{ cookiecutter.repo_organisation }}/{{ cookiecutter.repo_name }}.git'
+        env.environment = 'production'
+        env.git_branch = 'master'
+        env.git_remote = 'origin'
+        env.hosts = ['.nine.ch']
+        env.user = 'www-data'
+        env.project = '{{ cookiecutter.repo_name }}'
+        env.root = '/home/www-data/projects'
+        env.is_stage = False
+
+        _setup_path()
 
     env.deployments = ('production',)
 

@@ -11,24 +11,12 @@ raise Exception('Production not yet configured.')
 # = Global Settings =
 # ===================
 
-UNIQUE_PREFIX = '{{ cookiecutter.project_name }}_production'
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 # ===================
 # = Server Settings =
 # ===================
-
-DEPLOYMENT = {
-    'git_repository': 'git@github.com:{{ cookiecutter.repo_organisation }}/{{ cookiecutter.repo_name }}.git',
-    'git_branch': 'master',
-    'git_remote': 'origin',
-    'hosts': ['.nine.ch'],
-    'user': 'www-data',
-    'project': '{{ cookiecutter.repo_name }}',
-    'root': '/home/www-data/projects',
-    'is_stage': False,
-}
 
 DATABASES = {'default': dj_database_url.config()}
 DATABASES['default']['CONN_MAX_AGE'] = 60
