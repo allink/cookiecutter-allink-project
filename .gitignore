@@ -1,13 +1,2 @@
 .DS_Store
-/env
-/env_old
-/REQUIREMENTS.sha1
-/media
-/static
-/node_modules
-/webstats
-*.pyc
-*.sqlite
-*.mo
-*.pid
-.env
+
