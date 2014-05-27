@@ -20,7 +20,7 @@ else:
         env.environment = 'production'
         env.git_branch = 'master'
         env.git_remote = 'origin'
-        env.hosts = ['.nine.ch']
+        env.hosts = ['{{ cookiecutter.target_server }}']
         env.user = 'www-data'
         env.project = '{{ cookiecutter.repo_name }}'
         env.root = '/home/www-data/projects'
