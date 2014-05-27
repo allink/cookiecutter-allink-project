@@ -38,6 +38,13 @@ if __name__ == '__main__':
     if not os.path.isfile(".git/hooks/pre-commit"):
         os.symlink("../../pre-commit", ".git/hooks/pre-commit")
 
+    with open('.env', 'w') as f:
+        f.write('DATABASE_URL=postgres://%s:%s@localhost/%s\n' % (
+            os.environ['PGUSER'],
+            os.environ['PGPASSWORD'],
+            '{{ cookiecutter.project_name }}',
+        ))
+
     # install requirements
     subprocess.call(["pip", "install", "--upgrade", "wheel"])
     subprocess.call(["pip", "install", "--upgrade", "Fabric"])
