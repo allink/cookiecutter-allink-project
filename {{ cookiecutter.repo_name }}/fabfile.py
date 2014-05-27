@@ -10,7 +10,7 @@ else:
 
     def local():
         env.is_local = True
-        env.unique_identifier = '{{ cookiecutter.repo_name}}'
+        env.unique_identifier = '{{ cookiecutter.project_name}}'
         env.root = os.path.dirname(__file__)
         env.environment = 'development'
 
@@ -43,17 +43,17 @@ if __name__ == '__main__':
         os.symlink("../../pre-commit", ".git/hooks/pre-commit")
 
     with open('.env', 'w') as f:
-        f.write('SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+        f.write('SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n')
         f.write('DATABASE_URL=postgres://%s:%s@localhost/%s\n' % (
             os.environ['PGUSER'],
             os.environ['PGPASSWORD'],
             '{{ cookiecutter.project_name }}',
         ))
         f.write('CACHE_URL=locmem://\n')
-        f.write('SESSION_CACHE_URL=file://%s\n' % os.environ['TEMPDIR'])
+        f.write('SESSION_CACHE_URL=file://%s\n' % os.environ['TMPDIR'])
 
     # create virtualenv and install requirements
-    subprocess.call(["virtualenv", "env", "--prompt=\"({{ cookiecutter.repo_name }})\""])
+    subprocess.call(["virtualenv", "env", "--prompt=({{ cookiecutter.repo_name }})"])
     subprocess.call(". env/bin/activate && pip install --upgrade wheel setuptools pip", shell=True)
     subprocess.call(". env/bin/activate && pip install Fabric", shell=True)
     subprocess.call(". env/bin/activate && pip install --requirement REQUIREMENTS_LOCAL", shell=True)
