@@ -1,5 +1,3 @@
-project_python = '{{ cookiecutter.project_name }}'
-
 try:
     from allink_essentials.fabfiles.proxima_class_fabfile import *  # noqa
     from allink_essentials.fabfiles.proxima_class_fabfile import _setup_path
@@ -8,7 +6,13 @@ except ImportError:
     print "Try to execute python fabfile.py first"
 
 else:
-    env.project_python = project_python
+    env.project_python = '{{ cookiecutter.project_name }}'
+
+    def local():
+        env.is_local = True
+        env.unique_identifier = '{{ cookiecutter.repo_name}}'
+        env.root = os.path.dirname(__file__)
+        env.environment = 'development'
 
     def production():
         env.unique_identifier = '{{ cookiecutter.project_name }}_production'
@@ -39,16 +43,17 @@ if __name__ == '__main__':
         os.symlink("../../pre-commit", ".git/hooks/pre-commit")
 
     with open('.env', 'w') as f:
+        f.write('SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
         f.write('DATABASE_URL=postgres://%s:%s@localhost/%s\n' % (
             os.environ['PGUSER'],
             os.environ['PGPASSWORD'],
             '{{ cookiecutter.project_name }}',
         ))
+        f.write('CACHE_URL=locmem://\n')
+        f.write('SESSION_CACHE_URL=file://%s\n' % os.environ['TEMPDIR'])
 
     # create virtualenv and install requirements
-    subprocess.call(["virtualenv", "--prompt=\"({{cookiecutter.repo_name}})\""])
-    activate_this = os.path.join('env', 'bin', 'activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-    subprocess.call(["pip", "install", "--upgrade", "wheel"])
-    subprocess.call(["pip", "install", "--upgrade", "Fabric"])
-    subprocess.call(["pip", "install", "--requirement", "REQUIREMENTS_LOCAL"])
+    subprocess.call(["virtualenv", "env", "--prompt=\"({{ cookiecutter.repo_name }})\""])
+    subprocess.call(". env/bin/activate && pip install --upgrade wheel setuptools pip", shell=True)
+    subprocess.call(". env/bin/activate && pip install Fabric", shell=True)
+    subprocess.call(". env/bin/activate && pip install --requirement REQUIREMENTS_LOCAL", shell=True)
