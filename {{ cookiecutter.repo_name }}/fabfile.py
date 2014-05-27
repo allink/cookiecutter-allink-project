@@ -45,7 +45,10 @@ if __name__ == '__main__':
             '{{ cookiecutter.project_name }}',
         ))
 
-    # install requirements
+    # create virtualenv and install requirements
+    subprocess.call(["virtualenv", "--prompt=\"({{cookiecutter.repo_name}})\""])
+    activate_this = os.path.join('env', 'bin', 'activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
     subprocess.call(["pip", "install", "--upgrade", "wheel"])
     subprocess.call(["pip", "install", "--upgrade", "Fabric"])
     subprocess.call(["pip", "install", "--requirement", "REQUIREMENTS_LOCAL"])
