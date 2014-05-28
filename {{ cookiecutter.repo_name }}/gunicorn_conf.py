@@ -3,7 +3,7 @@ from getenv import env
 
 dotenv.read_dotenv()
 
-bind = ['unix:./gunicorn.sock']
+bind = ['unix:./tmp/gunicorn.sock']
 workers = env('WEB_CONCURRENCY', 2)
 preload_app = True
 

@@ -6,8 +6,8 @@ BASE_DIR=$(dirname $0)
 GUNICORN_CMD="./env/bin/gunicorn"
 CELERY_CMD="./env/bin/python"
 
-GUNICORN_PID="gunicorn.pid"
-CELERY_PID="celery.pid"
+GUNICORN_PID="tmp/gunicorn.pid"
+CELERY_PID="tmp/celery.pid"
 
 GUNICORN_ARGS="wsgi:application -c gunicorn_conf.py --daemon --pid=$GUNICORN_PID"
 CELERY_ARGS="manage.py celery worker --pidfile=$CELERY_PID --beat --detach"
