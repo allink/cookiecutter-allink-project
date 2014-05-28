@@ -24,14 +24,13 @@
         <meta property="og:title" content="{{ feincms_page.title_tag }} | {% endraw %}{{ cookiecutter.company_name }}{% raw %}"/>
         <meta property="og:description" content="{{ feincms_page.meta_description }}"/>
         <link rel="icon" type="image/gif" href="{% static 'images/favicons/favicon.gif' %}">
-        <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon.png' %}">
         <link rel="apple-touch-icon" sizes="114×114" href="{% static 'images/favicons/clip-icon-iphone4.png' %}" />
         <link rel="apple-touch-icon" sizes="72×72" href="{% static 'images/favicons/clip-icon-ipad.png' %}" />
         <link rel="apple-touch-icon" sizes="52×52" href="{% static 'images/favicons/clip-icon-iphone.png' %}" />
         {% if feincms_page.og_image %}
             <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{{ feincms_page.og_image.url }}" />
         {% else %}
-            <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'images/favicons/clip-icon-iphone4.png' %}" />
+            <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'images/favicons/200x200.png' %}" />
         {% endif %}
         {% compressed_css 'main' %}
         <!--[if lt IE 9]>
