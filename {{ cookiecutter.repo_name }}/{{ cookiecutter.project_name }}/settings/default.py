@@ -10,7 +10,7 @@ import django_cache_url
 ADMINS = (
     ('itcrowd', 'itcrowd@allink.ch'),
 )
-SECRET_KEY = env('SECRET_KEY', '{{ secret_key }}')
+SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = ["*"]
 LANGUAGE_CODE = 'de'
 LANGUAGES = (
