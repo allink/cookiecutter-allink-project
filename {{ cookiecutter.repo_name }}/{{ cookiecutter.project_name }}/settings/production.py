@@ -14,7 +14,7 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES['default']['CONN_MAX_AGE'] = 60
 
 RAVEN_CONFIG = {
-    'dsn': '',
+    'dsn': '{{ cookiecutter.sentry_dsn}}',
 }
 
 TEMPLATE_LOADERS = (
