@@ -7,8 +7,8 @@ bind = ['unix:./tmp/gunicorn.sock']
 workers = env('WEB_CONCURRENCY', 2)
 preload_app = True
 
-accesslog = "/home/www-data/logs/{{ cookiecutter.project_name }}_gunicorn.access.log"
-errorlog = "/home/www-data/logs/{{ cookiecutter.project_name }}_gunicorn.error.log"
+accesslog = "/home/www-data/logs/customer/{{ cookiecutter.project_name }}_gunicorn.access.log"
+errorlog = "/home/www-data/logs/customer/{{ cookiecutter.project_name }}_gunicorn.error.log"
 
 proc_name = "{{ cookiecutter.project_name }}_gunicorn"
 
