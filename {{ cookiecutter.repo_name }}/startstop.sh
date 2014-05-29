@@ -11,8 +11,8 @@ CELERY_CMD="./env/bin/newrelic-admin"
 GUNICORN_PID="tmp/gunicorn.pid"
 CELERY_PID="tmp/celery.pid"
 
-GUNICORN_ARGS="run-programm gunicorn wsgi:application -c gunicorn_conf.py --daemon --pid=$GUNICORN_PID"
-CELERY_ARGS="run-programm ./manage.py celery worker --pidfile=$CELERY_PID --beat --detach"
+GUNICORN_ARGS="run-program gunicorn wsgi:application -c gunicorn_conf.py --daemon --pid=$GUNICORN_PID"
+CELERY_ARGS="run-program ./manage.py celery worker --pidfile=$CELERY_PID --beat --detach"
 
 start () {
     start-stop-daemon --start --pidfile $BASE_DIR/$1 --chdir $BASE_DIR --exec $2 -- $3
