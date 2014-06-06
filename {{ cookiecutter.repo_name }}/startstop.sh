@@ -24,7 +24,7 @@ stop () {
 }
 
 usage(){
-    echo "Usage: $N {start|stop|restart} {gunicorn|celery}" >&2
+    echo "Usage: $0 {start|stop|restart} {gunicorn|celery}" >&2
     exit 1
 }
 
