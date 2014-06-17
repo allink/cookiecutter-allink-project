@@ -43,6 +43,7 @@ if __name__ == '__main__':
         os.symlink("../../pre-commit", ".git/hooks/pre-commit")
 
     with open('.env', 'w') as f:
+        f.write('DJANGO_SETTINGS_MODULE={{ cookiecutter.project_name }}.settings.development\n')
         f.write('SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n')
         f.write('DATABASE_URL=postgres://%s:%s@localhost/%s\n' % (
             os.environ['PGUSER'],
