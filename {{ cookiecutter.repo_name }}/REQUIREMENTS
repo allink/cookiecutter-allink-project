@@ -10,7 +10,7 @@ pytz
 raven
 django-admin-sso
 psycopg2
-https://github.com/allink/allink-essentials/zipball/master
+allink-essentials>=1.0.0,<2.0.0
 mailchimp
 dj-database-url
 django-cache-url
