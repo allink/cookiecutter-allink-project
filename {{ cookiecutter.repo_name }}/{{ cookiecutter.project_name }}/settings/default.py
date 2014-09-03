@@ -299,6 +299,9 @@ CELERY_ENABLE_UTC = True
 # = Miscellaneous Settings =
 # ==========================
 
+DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID', None)
+DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID', None)
+
 GOOGLE_ANALYTICS_ID = ""
 
 import re

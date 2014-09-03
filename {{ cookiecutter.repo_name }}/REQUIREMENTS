@@ -1,6 +1,6 @@
-https://github.com/django/django/zipball/stable/1.7.x
+Django>=1.7,<1.6
 django-mptt
-https://github.com/feincms/feincms/zipball/next
+feincms>=1.10,<1.11
 Pillow
 django-robots
 django-pipeline
