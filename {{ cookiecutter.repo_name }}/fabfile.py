@@ -52,6 +52,8 @@ if __name__ == '__main__':
         ))
         f.write('CACHE_URL=locmem://\n')
         f.write('SESSION_CACHE_URL=file://%s\n' % os.environ['TMPDIR'])
+        f.write('DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID=%s\n' % os.environ['DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID'])
+        f.write('DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET=%s\n' % os.environ['DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET'])
 
     # create virtualenv and install requirements
     subprocess.call(["virtualenv", "env", "--prompt=({{ cookiecutter.repo_name }})"])
