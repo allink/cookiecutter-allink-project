@@ -252,9 +252,9 @@ PIPELINE_JS = {
         'source_filenames': (
             'lib/jquery-1.11.0.js',
             'lib/jquery.sticky.js',
-            'lib/bootstrap-3.1.1/js/transition.js'
-            'lib/bootstrap-3.1.1/js/dropdown.js'
-            'lib/bootstrap-3.1.1/js/collapse.js'
+            'lib/bootstrap-3.1.1/js/transition.js',
+            'lib/bootstrap-3.1.1/js/dropdown.js',
+            'lib/bootstrap-3.1.1/js/collapse.js',
             'javascript/main.js',
         ),
         'output_filename': 'js/main.js',
