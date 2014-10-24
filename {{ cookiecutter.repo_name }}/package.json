@@ -2,6 +2,7 @@
   "dependencies": {
     "less": "1.7.0",
     "uglify-js": "2.4.13",
-    "cssmin": "0.4.1"
+    "cssmin": "0.4.1",
+    "jshint": "2.1.10"
   }
 }
