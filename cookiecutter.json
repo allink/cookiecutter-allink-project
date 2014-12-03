@@ -4,7 +4,7 @@
     "repo_organisation": "allink",
     "company_name": "allink GmbH",
     "newrelic_name": "allink project",
-    "newrelic_key": "1a2a3ad00c823813b31392dfc3ad0f93d7e83fe5",
+    "newrelic_key": "",
     "sentry_dsn": "",
     "target_server": ""
 }
