@@ -312,8 +312,6 @@ IGNORABLE_404_URLS = (
     re.compile(r'\.cgi$'),
 )
 
-GOOGLE_ANALYTICS_ID = ""
-
 AUTHENTICATION_BACKENDS = (
     'admin_sso.auth.DjangoSSOAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
