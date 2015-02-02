@@ -1,4 +1,4 @@
-{% raw %}{% load feincms_tags feincms_page_tags analytics_tags compressed mptt_tags in_footer staticfiles %}
+{% raw %}{% load feincms_tags feincms_page_tags analytics_tags pipeline mptt_tags in_footer staticfiles %}
 <!DOCTYPE html>
 <html lang="{{ feincms_page.language }}">
     <head>
@@ -32,7 +32,7 @@
         {% else %}
             <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'images/favicons/200x200.png' %}" />
         {% endif %}
-        {% compressed_css 'main' %}
+        {% stylesheet 'main' %}
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -114,9 +114,9 @@
                 </div>
             </div>
         </footer>
-        {% compressed_js 'main' %}
+        {% javascript 'main' %}
         <!--[if lte IE 9]>
-            {% compressed_js 'ie9' %}
+            {% javascript 'ie9' %}
         <![endif]-->
         {% ganalytics %}
     </body>
