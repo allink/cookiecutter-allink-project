@@ -8,7 +8,7 @@ addons:
 env:
   - DJANGO_SETTINGS_MODULE="{{ cookiecutter.project_name }}.settings.travis"
 install:
-  - pip install -r REQUIREMENTS_SERVER --use-mirrors
+  - pip install -r REQUIREMENTS_SERVER
   - pip install flake8 --ignore-installed
   - npm install jshint -g
   - npm install less@">=1.5.0 <1.6.0"
