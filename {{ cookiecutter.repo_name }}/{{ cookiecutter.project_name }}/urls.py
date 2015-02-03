@@ -4,6 +4,8 @@ from django.contrib import admin
 
 from feincms.module.page.sitemap import PageSitemap
 
+from allink_essentials.view.langauge_redirect_view import FuzzyLanguageRedirectView
+
 import os
 
 
@@ -19,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^404/$', 'django.views.defaults.page_not_found'),
     url(r'^500/$', 'django.views.defaults.server_error'),
     url(r'^mailchimp/$', include('allink_essentials.mailchimp_api.urls')),
+    url(r'^$', FuzzyLanguageRedirectView.as_view()),
     url(r'', include('feincms.urls')),
 )
 
