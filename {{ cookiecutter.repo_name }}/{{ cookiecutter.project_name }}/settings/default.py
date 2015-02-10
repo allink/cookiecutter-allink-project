@@ -1,4 +1,5 @@
 import os
+import re
 from getenv import env
 import dj_database_url
 import django_cache_url
@@ -305,7 +306,6 @@ DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET
 
 GOOGLE_ANALYTICS_ID = ""
 
-import re
 IGNORABLE_404_URLS = (
     re.compile(r'^/cgi-bin/'),
     re.compile(r'\.php$'),
