@@ -75,8 +75,8 @@ def check_files(files, check):
     result = 0
     print check['output']
     for file_name in files:
-        if not 'match_files' in check or matches_file(file_name, check['match_files']):
-            if not 'ignore_files' in check or not matches_file(file_name, check['ignore_files']):
+        if 'match_files' not in check or matches_file(file_name, check['match_files']):
+            if 'ignore_files' not in check or not matches_file(file_name, check['ignore_files']):
                 process = subprocess.Popen(check['command'] % file_name, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 out, err = process.communicate()
                 if out or err:
