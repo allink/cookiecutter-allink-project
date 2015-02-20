@@ -1,13 +1,21 @@
 @import "lib.less";
-@import "mixins.less";
+@import "variables.less";
 
-body {
-    margin-bottom: @footer-height;
+html {
+    overflow-y: scroll;     // showing scrollbar all the time, preventing horizontal "jumps"
+    min-height: 100%;       // check if necessary, comemnt if yes
+    position: relative;     // check if necessary, comemnt if yes
 }
 
-footer {
-    height: @footer-height;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+@media(min-width: @screen-sm-min) {
+    body {
+        margin-bottom: @footer-height;
+    }
+
+    footer {
+        height: @footer-height;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
 }

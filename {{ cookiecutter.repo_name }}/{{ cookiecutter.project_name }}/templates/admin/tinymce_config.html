@@ -1,24 +1,20 @@
-{% raw %}{% extends "admin/content/richtext/init_tinymce.html" %}
-{% block buttons1 %}formatselect,|,bold,italic,|,bullist,numlist,|,link,unlink,|,pasteword,code{% endblock %}
+{% extends "admin/content/richtext/init_tinymce4.html" %}
 {% block settings %}
-{{block.super}},
-    /*
-    style_formats : [
-        {title : 'MyStyle', block:'div', classes : 'my-style'}
-    ],
-    */
-    /*
-    template_templates : [
-        {
-            title : "Example",
-            src : "/static/tiny_mce_templates/example.html",
-            description : "Example Description"
-        }
-    ],
-    */
-    valid_children : "+body[style]",
-    {% if TINYMCE_EXTERNAL_IMAGE_LIST_URL %}external_image_list_url: "{{ TINYMCE_EXTERNAL_IMAGE_LIST_URL }}"{% endif %}
-
+    link_list: '/admin/tiny_mce_links.js',
+    valid_children : '+body[style]',
+    width: '600px',
+    plugins: 'fullscreen paste link code visualblocks',
+    paste_auto_cleanup_on_paste: true,
+    paste_as_text: true,
+    relative_urls: false,
+    invalid_elements: 'script',
+    statusbar: false,
+    toolbar: 'insertfile undo redo | styleselect | bold | bullist numlist | link | code visualblocks',
+    menubar : false,
+    visualblocks_default_state: true,
+    style_formats: [
+        {title: 'H1', block: 'h1'},
+        {title: 'H2', block: 'h2'},
+        {title: 'Paragraph', block: 'p'}
+    ]
 {% endblock settings %}
-{% block plugins %}{{ block.super }},template,paste{% endblock %}
-{% block blockformats %}p,h2{% endblock %}{% endraw %}

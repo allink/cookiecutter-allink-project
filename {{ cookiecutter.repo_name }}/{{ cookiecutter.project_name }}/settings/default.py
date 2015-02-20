@@ -225,8 +225,7 @@ LOGGING = {
 
 FEINCMS_ADMIN_MEDIA = '/static/feincms/'
 FEINCMS_TINYMCE_INIT_CONTEXT = {
-    'TINYMCE_JS_URL': os.path.join(STATIC_URL, 'lib/tiny_mce/tiny_mce.js'),
-    'TINYMCE_CONTENT_CSS_URL': os.path.join(STATIC_URL, 'lib/tiny_mce.css'),
+    'TINYMCE_JS_URL': os.path.join(STATIC_URL, 'lib/tinymce/tinymce.min.js'),
     'TINYMCE_LINK_LIST_URL': '/admin/tiny_mce_links.js',
     'TINYMCE_EXTERNAL_IMAGE_LIST_URL': None
 }
