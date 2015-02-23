@@ -81,8 +81,10 @@
                 </nav>
             </header>
             <div class="main">
-                <h1>{{ feincms_page.title }}</h1>
-                {% feincms_render_region feincms_page "main" request %}
+                {% block main %}
+                    <h1>{{ feincms_page.title }}</h1>
+                    {% feincms_render_region feincms_page "main" request %}
+                {% endblock main %}
             </div>
         </div>
         <footer>
