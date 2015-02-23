@@ -130,6 +130,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'feincms.context_processors.add_page_if_missing',  # used by 404 page
 )
 
 TEMPLATE_LOADERS = (

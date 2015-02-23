@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title>Seite nicht vorhanden - Page not available</title>
-    </head>
-    <body>
-        Die angeforderte Seite ist nicht vorhanden.<br/>
-        The requested page is not available.
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% comment %}
+    Needs 'feincms.context_processors.add_page_if_missing',
+    only working on production env
+{% endcomment %}
+
+{% block title %}
+    Seite nicht vorhanden - Page not available
+{% endblock title %}
+
+{% block main %}
+    Die angeforderte Seite ist nicht vorhanden.<br/>
+    The requested page is not available.
+{% endblock main %}
