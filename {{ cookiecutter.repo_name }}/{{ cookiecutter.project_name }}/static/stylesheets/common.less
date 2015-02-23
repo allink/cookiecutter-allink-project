@@ -1,0 +1,63 @@
+@import "variables.less";
+
+html {
+}
+
+body {
+}
+
+h1, h2, h3, h4, h5, h6,
+ul, ol, dd,
+p, figure, address,
+pre, table, fieldset, hr {
+    &:first-child { margin-top: 0; }
+    &:last-child { margin-bottom: 0; }
+}
+
+h2, h4, h5, h6,
+ul, ol, dd,
+p, figure, address,
+pre, table, fieldset, hr {
+    margin: 20px 0 0 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+// spacings
+
+.row-spacing {
+    margin-top: 30px;
+}
+
+
+@media (max-width: @screen-xs-max) {
+    .spacing-xs {
+        margin-top: 15px;
+    }
+
+    .row-spacing {
+        margin-top: 15px;
+    }
+}
+
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .spacing-sm {
+        margin-top: 20px;
+    }
+
+    .row-spacing {
+        margin-top: 20px;
+    }
+}
