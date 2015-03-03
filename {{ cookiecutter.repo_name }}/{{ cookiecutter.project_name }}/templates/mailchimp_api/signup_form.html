@@ -1,5 +1,5 @@
 {% raw %}{% load i18n %}
-<form action="" method="post" id="mailchimp-form" role="form">
+<form action="/mailchimp" method="post" id="mailchimp-form" role="form">
     {% csrf_token %}
     <div class="input-group large">
         <input name="email" id="id_email" type="email" placeholder="{% trans "Ihre E-Mail Adresse" %}" class="form-control" value="{{ form.email.value|default:"" }}">
