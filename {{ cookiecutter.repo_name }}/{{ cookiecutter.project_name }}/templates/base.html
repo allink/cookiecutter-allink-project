@@ -30,7 +30,7 @@
         {% if feincms_page.og_image %}
             <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{{ feincms_page.og_image.url }}" />
         {% else %}
-            <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'images/favicons/200x200.png' %}" />
+            <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'images/facebook.jpg' %}" />
         {% endif %}
         {% stylesheet 'main' %}
         <!--[if lt IE 9]>
