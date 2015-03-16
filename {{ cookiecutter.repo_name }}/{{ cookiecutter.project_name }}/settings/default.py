@@ -152,7 +152,6 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'feincms',
     'feincms.module.page',
-    'feincms.module.medialibrary',
     'allink_essentials',
     'allink_essentials.in_footer',
     'pipeline',
@@ -240,9 +239,7 @@ FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
 PIPELINE_CSS = {
     'main': {
         'source_filenames': (
-            'lib/bootstrap-3.1.1/less/bootstrap.less',
             'stylesheets/base.less',
-            'stylesheets/layout.less',
         ),
         'output_filename': 'css/main.css',
         'variant': 'datauri',
@@ -254,9 +251,9 @@ PIPELINE_JS = {
         'source_filenames': (
             'lib/jquery-1.11.0.js',
             'lib/jquery.sticky.js',
-            'lib/bootstrap-3.1.1/js/transition.js',
-            'lib/bootstrap-3.1.1/js/dropdown.js',
-            'lib/bootstrap-3.1.1/js/collapse.js',
+            'lib/bootstrap/js/transition.js',
+            'lib/bootstrap/js/dropdown.js',
+            'lib/bootstrap/js/collapse.js',
             'javascript/main.js',
         ),
         'output_filename': 'js/main.js',
@@ -304,7 +301,7 @@ CELERY_ENABLE_UTC = True
 DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID', None)
 DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET', None)
 
-GOOGLE_ANALYTICS_ID = ""
+# GOOGLE_ANALYTICS_ID = ""
 GOOGLE_TAG_MANAGER_ID = ""
 
 IGNORABLE_404_URLS = (

@@ -1,21 +1,98 @@
 @import "lib.less";
 @import "variables.less";
 
-html {
-    overflow-y: scroll;     // showing scrollbar all the time, preventing horizontal "jumps"
-    min-height: 100%;       // check if necessary, comemnt if yes
-    position: relative;     // check if necessary, comemnt if yes
+html,
+body {
+    height: 100%;
 }
 
-@media(min-width: @screen-sm-min) {
-    body {
-        margin-bottom: @footer-height;
+html {
+    overflow-y: scroll;     // showing scrollbar all the time, preventing horizontal "jumps"
+}
+
+body {
+    background: @demo-bg;       //demo
+}
+
+header {
+    background: @demo-bg;       //demo
+}
+
+// sticky footer
+
+body {
+    display: table;
+    width: 100%;
+}
+
+.page-row {
+    display: table-row;
+    height: 1px;
+}
+
+.page-row-expanded {
+    height: 100%;
+}
+
+// end sticky footer
+
+.main {
+    padding-top: 20px; padding-bottom: 20px;
+    background: @demo-bg;       //demo
+}
+
+.container > .inner {
+    @media (min-width: @screen-sm-min) {
+        padding-left: 50px; padding-right: 50px;
     }
 
-    footer {
-        height: @footer-height;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+    @media (min-width: @screen-md-min) {
+        padding-left: 80px; padding-right: 80px;
     }
+
+    @media (min-width: @screen-lg-min) {
+        padding-left: 100px; padding-right: 100px;
+    }
+}
+
+.content-bg {
+    min-height: 100%;
+    margin: 0 auto;
+
+    &, .color {
+        @media (min-width: @screen-sm-min) {
+            width: @container-sm;
+        }
+
+        @media (min-width: @screen-md-min) {
+            width: @container-md;
+        }
+
+        @media (min-width: @screen-lg-min) {
+            width: @container-lg;
+        }
+    }
+
+    .color {
+        background: @demo-bg;       //demo
+        position: absolute;
+        height: 100%;
+        z-index: -1;
+    }
+}
+
+footer {
+    background: @demo-bg;       //demo
+
+    .content {
+        padding-top: 20px; padding-bottom: 20px;
+    }
+
+    > .container {
+        background: @demo-bg;       //demo
+    }
+}
+
+.container > .inner > .row  {
+    background: @demo-bg;       //demo
 }

@@ -1,0 +1,58 @@
+@import 'variables.less';
+@import 'typo.less';
+
+
+// bootstrap navbar reset
+
+.navbar-default {
+    border: none;
+    margin: 0;
+}
+
+.navbar.navbar-default > .container > .inner {
+    .navbar-collapse  {
+        background: @demo-bg;       //demo
+    }
+}
+
+.navbar-brand,
+.navbar {
+    height: auto;
+}
+
+.navbar {
+    @media (min-width: @screen-sm-min) {
+        padding-top: 20px; padding-bottom: 20px;
+    }
+}
+
+.nav > li {
+
+    @media (min-width: @screen-sm-min) {
+        & + li {
+            margin-left: 40px;
+        }
+    }
+
+    > a {
+        padding: 0;
+    }
+}
+
+.navbar-default .navbar-nav > li > a {
+    .nav-font();
+}
+
+.navbar-default .navbar-nav > .active > a {
+    .nav-font-active();
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background: none;
+}
+
+.navbar-toggle {
+    margin: 0;
+}

@@ -40,10 +40,11 @@
     </head>
     <body>
         {% google_tag_manager %}
-        <div class="wrapper">
-            <header>
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
+        <div class="content-bg"><div class="color"></div></div>
+        <header class="page-row">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="inner">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                                 <span class="sr-only">Toggle navigation</span>
@@ -54,7 +55,7 @@
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                {% feincms_nav feincms_page level=1 depth=2 as navitems %}
+                                {% feincms_nav feincms_page level=2 depth=2 as navitems %}
                                 {% recursetree navitems %}
                                     {% if children %}
                                         <li {% if node|is_equal_or_parent_of:feincms_page %}class="active"{% endif %}>
@@ -74,45 +75,58 @@
                             <ul class="nav navbar-nav navbar-right">
                                 {% feincms_languagelinks for feincms_page as languagelinks existing %}
                                 {% for key, name, link in languagelinks %}
-                                <li><a href="{{ link }}"{% if key == feincms_page.language %} class="active"{% endif %}>{{ key }}</a></li>
+                                <li{% if key == feincms_page.language %} class="active"{% endif %} ><a href="{{ link }}">{{ key }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
                     </div>
-                </nav>
-            </header>
-            <div class="main">
-                {% block main %}
-                    <h1>{{ feincms_page.title }}</h1>
-                    {% feincms_render_region feincms_page "main" request %}
-                {% endblock main %}
+                </div>
+            </nav>
+        </header>
+        <div class="page-row page-row-expanded">
+            <div class="main container">
+                <div class="inner content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h1>{{ feincms_page.title }}</h1>
+                            {% block main %}
+                                {% feincms_render_region feincms_page "main" request %}
+                            {% endblock main %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <footer>
+        <footer class="page-row">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        {% footer_navigation for feincms_page as footer_pages %}
-                        <nav class="footer-nav">
-                            <ul>
-                                {% for p in footer_pages %}
-                                    <li>
-                                        <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <address>
-                            {% endraw %}{{ cookiecutter.company_name }}{% raw %}
-                            Strasse 00
-                            0000 Stadt
-                            <a href="mailto:mail@mail.com">mail@mail.com</a>
-                        </address>
-                    </div>
-                    <div class="col-md-4 col-sm-12 mailchimp-result">
-                        {% include "mailchimp_api/signup_form.html" %}
+                <div class="inner content">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            {% footer_navigation for feincms_page as footer_pages %}
+                            <nav class="footer-nav">
+                                <ul class="list-unstyled">
+                                    {% for p in footer_pages %}
+                                        <li>
+                                            <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-md-4 col-sm-6 spacing-xs">
+                            <address>
+                                allink GmbH<br>
+                                Strasse 00<br>
+                                0000 Stadt<br>
+                                <a href="mailto:mail@mail.com">mail@mail.com</a>
+                            </address>
+                        </div>
+                        <div class="col-md-4 col-sm-12 spacing-xs spacing-sm">
+                            <h3>Newsletter</h3>
+                            <div class="mailchimp-result">
+                                {% include "mailchimp_api/signup_form.html" %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
