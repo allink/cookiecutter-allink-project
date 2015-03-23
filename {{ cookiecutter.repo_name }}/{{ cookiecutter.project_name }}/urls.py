@@ -14,7 +14,7 @@ sitemaps = {
 }
 
 urlpatterns = patterns('',
-    url(r'^admin/tiny_mce_links\.js$', '{{ cookiecutter.project_name }}.views.get_tiny_mce_links'),
+    url(r'^admin/tinymce_links\.js$', '{{ cookiecutter.project_name }}.views.get_tiny_mce_links'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', include('robots.urls')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
