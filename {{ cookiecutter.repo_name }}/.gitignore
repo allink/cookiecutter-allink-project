@@ -5,6 +5,7 @@
 /media
 /static
 /node_modules
+/compiled_static
 /webstats
 *.pyc
 *.sqlite
