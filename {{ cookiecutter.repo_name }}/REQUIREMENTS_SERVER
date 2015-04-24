@@ -3,4 +3,5 @@ redis
 django-redis
 newrelic
 gunicorn
+django-lockdown
 --requirement REQUIREMENTS
