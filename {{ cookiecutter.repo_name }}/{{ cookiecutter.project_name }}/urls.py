@@ -15,6 +15,8 @@ sitemaps = {
 
 urlpatterns = patterns('',
     url(r'^admin/tinymce_links\.js$', '{{ cookiecutter.project_name }}.views.get_tiny_mce_links'),
+    # Used for tinymce in Application
+    # url(r'^tinymce_settings\.js$', TemplateView.as_view(template_name='tinymce/app_settings.js')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', include('robots.urls')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),

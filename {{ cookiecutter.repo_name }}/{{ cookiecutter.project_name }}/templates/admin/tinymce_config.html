@@ -1,23 +1,61 @@
-{% raw %}
-{% extends "admin/content/richtext/init_tinymce4.html" %}
-{% block settings %}
-    link_list: '/admin/tiny_mce_links.js',
-    valid_children : '+body[style]',
-    autoresize_min_height: '300px',
-    width: '720px',
-    plugins: 'fullscreen paste link code visualblocks autoresize',
-    paste_auto_cleanup_on_paste: true,
-    paste_as_text: true,
-    relative_urls: false,
-    invalid_elements: 'script',
-    statusbar: false,
-    toolbar: 'insertfile undo redo | styleselect | bold | bullist numlist | link | code visualblocks',
-    menubar : false,
-    visualblocks_default_state: true,
-    style_formats: [
-        {title: 'H1', block: 'h1'},
-        {title: 'H2', block: 'h2'},
-        {title: 'Paragraph', block: 'p'}
-    ]
-{% endblock settings %}
-{% endraw %}
+{% block tinymce_script %}
+    {% if TINYMCE_JS_URL %}
+        <script type="text/javascript" src="{{ TINYMCE_JS_URL }}"></script>
+    {% endif %}
+{% endblock %}
+
+{% block tinymce_init %}
+    <script type="text/javascript">
+        {% block functions %}{% endblock %}
+    {% if TINYMCE_DOMAIN %}
+      document.domain = '{{ TINYMCE_DOMAIN }}';
+    {% endif %}
+
+    (function($){
+        var tinymce_added = {};
+        var tinymce_options = {
+            {% include "tinymce/tinymce_settings.js" %}
+        };
+
+        function feincms_richtext_remove_tinymce(field) {
+            var id = field ? field.id : this.id;
+            if(tinymce_added[id]) {
+                tinyMCE.execCommand('mceRemoveEditor', false, id)
+                tinymce_added[id] = false;
+            }
+        }
+
+        function feincms_richtext_add_tinymce(field) {
+            var id = field ? field.id : this.id;
+            if(!tinymce_added[id]) {
+                tinyMCE.execCommand('mceAddEditor', false, id)
+                tinymce_added[id] = true;
+                }
+        }
+
+        var richtext_init_fn = function(){
+            tinyMCE.init(tinymce_options);
+            $('{% block selectors %}.order-machine textarea.item-richtext, #frontend_editor textarea.item-richtext{% endblock %}').each(function(){
+                feincms_richtext_add_tinymce(this);
+            });
+        }
+
+            {% block enable %}
+        contentblock_init_handlers.push(richtext_init_fn);
+        contentblock_move_handlers.poorify.push(function(item) {
+            try {
+                tinyMCE.triggerSave();
+            } catch (error) {
+                alert("tinymce failed: " + error);
+            }
+            item.find('textarea.item-richtext').each(feincms_richtext_remove_tinymce);
+        });
+        contentblock_move_handlers.richify.push(function(item) {
+            item.find('textarea.item-richtext').each(feincms_richtext_add_tinymce);
+        });
+            {% endblock %}
+    })(feincms.jQuery);
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/tinymce_fix.css">
+{% endblock %}
