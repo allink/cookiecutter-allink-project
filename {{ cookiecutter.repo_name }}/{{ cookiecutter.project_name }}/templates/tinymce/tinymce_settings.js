@@ -1,3 +1,4 @@
+{% raw %}
 autoresize_min_height: '300px',
 width: '615px',
 link_list: '/admin/tinymce_links.js',
@@ -24,7 +25,7 @@ file_browser_callback: function(field_name, url, type, win) {
     });
 
     if(!cssFileExists) $('head').append('<link rel="stylesheet" type="text/css" href="/static/allink_files/stylesheets/style.css">');
-    
+
     $('body').append('<div class="lightbox">' +
         '<div class="wrapper">' +
             '<div class="inner">' +
@@ -50,3 +51,4 @@ file_browser_callback: function(field_name, url, type, win) {
         if(e.keyCode == 27) $('.lightbox').remove();
     });
 }
+{% endraw %}
