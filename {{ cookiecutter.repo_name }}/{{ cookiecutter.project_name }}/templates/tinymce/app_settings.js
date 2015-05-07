@@ -1,6 +1,6 @@
 {% raw %}
 tinyMCE.init({
-    selector: 'textarea.tinymce_widget',
+    selector: 'textarea',
     {% include "tinymce/tinymce_settings.js" %}
 });
 {% endraw %}
