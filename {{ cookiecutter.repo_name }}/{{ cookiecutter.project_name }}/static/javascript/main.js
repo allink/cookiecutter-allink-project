@@ -5,7 +5,7 @@ $(function() {
         $.post($this.attr('action'), $this.serialize(), function(data) {
             if (data == 'ok'){
                 $this.parents('.mailchimp-result').html( 'Vielen Dank für Ihre Anmeldung.' );
-                dataLayer.push({'event': 'newsletter.send'});
+                dataLayer.push({'event': 'newsletter.sent'});
             }
             else {
                 $this.parents('.mailchimp-result').html(data);

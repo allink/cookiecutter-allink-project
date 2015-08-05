@@ -19,7 +19,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ feincms_page.title_tag }} | {% endraw %}{{ cookiecutter.company_name }}{% raw %}</title>
+        <title>{% block title %}{{ feincms_page.title_tag }} | {% endraw %}{{ cookiecutter.company_name }}{% raw %}{% endblock title %}</title>
         <meta name="description" content="{{ feincms_page.meta_description }}">
         <meta property="og:title" content="{{ feincms_page.title_tag }} | {% endraw %}{{ cookiecutter.company_name }}{% raw %}"/>
         <meta property="og:description" content="{{ feincms_page.meta_description }}"/>
@@ -56,6 +56,7 @@
                             </button>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            {% if feincms_page %}
                             <ul class="nav navbar-nav">
                                 {% feincms_nav feincms_page level=2 depth=2 as navitems %}
                                 {% recursetree navitems %}
@@ -80,6 +81,7 @@
                                 <li{% if key == feincms_page.language %} class="active"{% endif %} ><a href="{{ link }}">{{ key }}</a></li>
                                 {% endfor %}
                             </ul>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
