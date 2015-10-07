@@ -5,26 +5,66 @@
 @import "../lib/bootstrap/less/mixins.less";
 @import "mixins.less";
 
-p {
-    &.intro {
-        font-size: 19px; /* example - remove */
-    }
+body {
+    &:extend(.text);
+}
+
+h1, h2, h3, h4, h5, h6,
+ul, ol, dd,
+p, figure, address,
+pre, table, fieldset, hr {
+    &:first-child { margin-top: 0; }
+    &:last-child { margin-bottom: 0; }
+}
+
+h2, h4, h5, h6,
+ul, ol, dd,
+p, figure, address,
+pre, table, fieldset, hr {
+    margin: 20px 0 0 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+}
+
+h1 {
+    &:extend(.h1);
+}
+
+h2 {
+    &:extend(.h2);
+}
+
+h3 {
+    &:extend(.h3);
+}
+
+h4 {
+    &:extend(.h4);
 }
 
 a {
-    .link-color(CornflowerBlue, lighten(CornflowerBlue, 20%));
-
     &:hover {
-        border-bottom: 1px solid lighten(CornflowerBlue, 20%);
+        border-bottom: 1px solid @link-hover-color;
+    }
+}
+
+small {
+    &:extend(.text-small);
+}
+
+p {
+    &.intro {
+        &:extend(.text-big);
     }
 }
 
 .arrow-link {
-
     &:hover {
         border-bottom: none;
         span.text {
-            border-bottom: 1px solid lighten(CornflowerBlue, 20%);
+            border-bottom: 1px solid @link-hover-color;
         }
         span[class*="icomoon"] {
             border-bottom: none;
@@ -205,9 +245,6 @@ ul {
 }
 
 /********** LISTS **********/
-.list-title  {
-    font-weight: bold;
-}
 
 .check-list, .simple-list {
     list-style-type: none;
@@ -217,9 +254,11 @@ ul {
     margin-bottom: 10px;
     position: relative;
     padding-left: 15px;
-    &:last-of-type {
+
+    &:last-child {
         margin-bottom: 0;
     }
+
     &:before {
         content: '•';
         color: CornflowerBlue;
@@ -235,9 +274,11 @@ ul {
     margin-bottom: 10px;
     position: relative;
     padding-left: 20px;
-    &:last-of-type {
+
+    &:last-child {
         margin-bottom: 0;
     }
+
     &:before {
         font-family: 'icomoon';
         content: "\e206";
@@ -263,26 +304,45 @@ ul {
 /********** SPACINGS **********/
 
 .row-spacing {
-    margin-top: 30px;
+    margin-top: @spacing-xs;
 }
 
 @media (max-width: @screen-xs-max) {
     .spacing-xs {
-        margin-top: 15px;
+        margin-top: @spacing-xs;
     }
 
     .row-spacing {
-        margin-top: 15px;
+        margin-top: @spacing-xs;
     }
 }
 
-
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
     .spacing-sm {
-        margin-top: 20px;
+        margin-top: @spacing-sm;
     }
 
     .row-spacing {
-        margin-top: 20px;
+        margin-top: @spacing-sm;
+    }
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .spacing-sm {
+        margin-top: @spacing-md;
+    }
+
+    .row-spacing {
+        margin-top: @spacing-md;
+    }
+}
+
+@media (min-width: @screen-lg-min) {
+    .spacing-sm {
+        margin-top: @spacing-lg;
+    }
+
+    .row-spacing {
+        margin-top: @spacing-lg;
     }
 }
