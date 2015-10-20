@@ -34,37 +34,56 @@
     }
 }
 
-// add an icon before text
-.icon-before(@padding-left: 1em; @icon: 'x'; @icon-size: 0.5em; @icon-left: 0;) {
+.icon-base(@icon, @icon-size) {
     position: relative;
     display: inline-block;
-    padding-left: @padding-left;
 
     &:before {
         .icomoon;
         content: @icon;
         position: absolute;
-        left: @icon-left;
         top: 50%;
         .translate(0, -50%);
         font-size: @icon-size;
     }
 }
 
-// add an icon before text
-.icon-after(@padding-right: 1em; @icon: 'x'; @icon-size: 0.5em; @icon-right: 0;) {
-    position: relative;
-    display: inline-block;
+.icon-left(@padding-left: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+    .icon-base(@icon, @icon-size);
+    padding-left: @padding-left;
+
+    &:before {
+        left: 0;
+        font-size: @icon-size;
+    }
+}
+
+.icon-left-outside(@padding-left: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+    .icon-base(@icon, @icon-size);
+    margin-left: @padding-left;
+
+    &:before {
+        font-size: @icon-size;
+        left: -@padding-left;
+    }
+}
+
+.icon-right(@padding-right: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+    .icon-base(@icon, @icon-size);
     padding-right: @padding-right;
 
-    &:after {
-        .icomoon;
-        content: @icon;
-        position: absolute;
-        right: @icon-right;
-        top: 50%;
-        .translate(0, -50%);
+    &:before {
+        right: 0;
+    }
+}
+
+.icon-right-outside(@padding-left: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+    .icon-base(@icon, @icon-size);
+    margin-right: @padding-left;
+
+    &:before {
         font-size: @icon-size;
+        right: -@padding-left;
     }
 }
 
