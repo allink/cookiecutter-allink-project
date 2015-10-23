@@ -48,9 +48,9 @@
     }
 }
 
-.icon-left(@padding-left: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+.icon-left(@padding: 1em; @icon: 'x'; @icon-size: 0.5em;) {
     .icon-base(@icon, @icon-size);
-    padding-left: @padding-left;
+    padding-left: @padding;
 
     &:before {
         left: 0;
@@ -58,32 +58,32 @@
     }
 }
 
-.icon-left-outside(@padding-left: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+.icon-left-outside(@padding: 1em; @icon: 'x'; @icon-size: 0.5em;) {
     .icon-base(@icon, @icon-size);
-    margin-left: @padding-left;
+    margin-left: @padding;
 
     &:before {
         font-size: @icon-size;
-        left: -@padding-left;
+        left: -@padding;
     }
 }
 
-.icon-right(@padding-right: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+.icon-right(@padding: 1em; @icon: 'x'; @icon-size: 0.5em;) {
     .icon-base(@icon, @icon-size);
-    padding-right: @padding-right;
+    padding-right: @padding;
 
     &:before {
         right: 0;
     }
 }
 
-.icon-right-outside(@padding-left: 1em; @icon: 'x'; @icon-size: 0.5em;) {
+.icon-right-outside(@padding: 1em; @icon: 'x'; @icon-size: 0.5em;) {
     .icon-base(@icon, @icon-size);
-    margin-right: @padding-left;
+    margin-right: @padding;
 
     &:before {
         font-size: @icon-size;
-        right: -@padding-left;
+        right: -@padding;
     }
 }
 

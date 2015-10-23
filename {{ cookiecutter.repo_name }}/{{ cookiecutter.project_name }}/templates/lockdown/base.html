@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>{% block title %}{% endblock %}</title>
+<title>{% raw %}{% block title %}{% endblock %}{% endraw %}</title>
 <meta name="robots" content="noindex,nofollow">
 </head>
 <body>
+{% raw %}
 {% block content %}
 {% endblock %}
+{% endraw %}
 </body>
 </html>
