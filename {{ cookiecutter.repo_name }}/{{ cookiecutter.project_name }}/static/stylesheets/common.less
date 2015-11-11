@@ -1,9 +1,12 @@
 @import "variables.less";
-
-html {
-}
+@import "lib.less";
+@import "../lib/bootstrap/less/mixins/buttons.less";
+@import "../lib/bootstrap/less/mixins/vendor-prefixes.less";
+@import "../lib/bootstrap/less/mixins.less";
+@import "mixins.less";
 
 body {
+    &:extend(.text);
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -23,41 +26,323 @@ pre, table, fieldset, hr {
 
 h1, h2, h3, h4, h5, h6 {
     margin-top: 1.5em;
+}
 
-    &:first-child {
-        margin-top: 0;
+h1 {
+    &:extend(.h1);
+}
+
+h2 {
+    &:extend(.h2);
+}
+
+h3 {
+    &:extend(.h3);
+}
+
+h4 {
+    &:extend(.h4);
+}
+
+a {
+    &:hover {
+        border-bottom: 1px solid @link-hover-color;
     }
+}
+
+small {
+    &:extend(.text-small);
+}
+
+p {
+    &.intro {
+        &:extend(.text-big);
+    }
+}
+
+.arrow-link {
+    &:hover {
+        border-bottom: none;
+        span.text {
+            border-bottom: 1px solid @link-hover-color;
+        }
+        span[class*="icomoon"] {
+            border-bottom: none;
+        }
+    }
+    span[class*="icomoon"] {
+        position: relative;
+        &:before {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            font-size: @icon-size;
+        }
+        + span.text {
+            margin-left: 10px;
+        }
+    }
+    span.text + span[class*="icomoon"] {
+        margin-right: 10px;
+    }
+}
+
+img {
+    width: 100%;
+}
+
+.img-rounded {
+    border-radius: @radius;
+}
+
+.img-thumbnail {
+    border: 1px solid #ddd;
+}
+
+ul {
+    padding-left: 0;
+}
+
+.figure-caption {
+    font-size: 12px; /* example - remove */
+    margin-top: 5px;
+}
+
+/********** UNDERLINE TITLES **********/
+.underline {
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 3px solid CornflowerBlue;
+}
+
+.underline-small {
+    position: relative;
+    padding-bottom: 10px;
+
+    &:after {
+        content: '';
+        height: 3px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: CornflowerBlue;
+        display: block;
+        width: 70px;
+    }
+}
+.sides-underline {
+    position: relative;
+    text-align: center;
+    span {
+        background: #fff;
+        padding: 0 10px;
+        position: relative;
+        z-index: 1;
+    }
+    &:before {
+        content: "";
+        display: block;
+        height: 3px;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        background: CornflowerBlue;
+        left: 0;
+    }
+}
+
+.sides-double-line {
+    position: relative;
+    text-align: center;
+    @media (min-width: @screen-sm-min) {
+        span {
+            background: #fff;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+        &:before {
+            content: "";
+            display: block;
+            height: 2px;
+            position: absolute;
+            top: 60%;
+            width: 100%;
+            background: CornflowerBlue;
+            left: 0;
+        }
+        &:after {
+            content: "";
+            display: block;
+            height: 2px;
+            position: absolute;
+            top: 46%;
+            width: 100%;
+            background: CornflowerBlue;
+            left: 0;
+        }
+    }
+
+    @media (max-width: @screen-xs-max) {
+        border-bottom: 2px solid CornflowerBlue;
+        padding-bottom: 2px;
+        span {
+            border-bottom: 2px solid CornflowerBlue;
+            display: inline-block;
+            padding-bottom: 5px;
+            width: 100%;
+        }
+    }
+}
+
+.sides-underline-complex {
+    text-align: center;
+    position: relative;
+    @media (min-width: @screen-sm-min) {
+        &:before {
+            content: "";
+            display: block;
+            height: 2px;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            background: CornflowerBlue;
+            left: 0;
+            z-index: 0;
+        }
+        span {
+            background: white;
+            position: relative;
+            padding: 0 20px;
+            z-index: 1;
+            &:before, &:after {
+                content: '';
+                height: 12px;
+                width: 2px;
+                background: CornflowerBlue;
+                position: absolute;
+                top: 33%;
+            }
+            &:before {
+                left: 0;
+            }
+            &:after {
+                right: 0;
+            }
+        }
+    }
+    @media (max-width: @screen-xs-max) {
+        padding-bottom: 5px;
+        border-bottom: 3px solid CornflowerBlue;
+    }
+}
+
+.underline-up-down {
+    border-top: 2px solid CornflowerBlue;
+    border-bottom: 2px solid CornflowerBlue;
+    padding: 6px 0;
+    text-align: center;
+}
+
+/********** LISTS **********/
+
+.check-list, .simple-list {
+    list-style-type: none;
+}
+
+.simple-list li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 15px;
 
     &:last-child {
         margin-bottom: 0;
     }
+
+    &:before {
+        content: '•';
+        color: CornflowerBlue;
+        margin-right: 6px;
+        font-size: 20px;
+        position: absolute;
+        top: -3px;
+        left: 0;
+    }
 }
 
+.check-list li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
 
-// spacings
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &:before {
+        font-family: 'icomoon';
+        content: "\e206";
+        color: CornflowerBlue;
+        margin-right: 6px;
+        font-size: 15px;
+        position: absolute;
+        top: -1px;
+        left: 0;
+    }
+}
+
+/********** TEXT AND ICONS **********/
+.text-icon {
+    &:before {
+        font-size: 15px;
+        position: relative;
+        top: 2px;
+        margin-right: 10px;
+    }
+}
+
+/********** SPACINGS **********/
 
 .row-spacing {
-    margin-top: 30px;
+    margin-top: @spacing-xs;
 }
-
 
 @media (max-width: @screen-xs-max) {
     .spacing-xs {
-        margin-top: 15px;
+        margin-top: @spacing-xs;
     }
 
     .row-spacing {
-        margin-top: 15px;
+        margin-top: @spacing-xs;
     }
 }
 
-
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
     .spacing-sm {
-        margin-top: 20px;
+        margin-top: @spacing-sm;
     }
 
     .row-spacing {
-        margin-top: 20px;
+        margin-top: @spacing-sm;
+    }
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .spacing-sm {
+        margin-top: @spacing-md;
+    }
+
+    .row-spacing {
+        margin-top: @spacing-md;
+    }
+}
+
+@media (min-width: @screen-lg-min) {
+    .spacing-sm {
+        margin-top: @spacing-lg;
+    }
+
+    .row-spacing {
+        margin-top: @spacing-lg;
     }
 }

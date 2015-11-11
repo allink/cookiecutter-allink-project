@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^500/$', 'django.views.defaults.server_error'),
     url(r'^mailchimp/$', include('allink_essentials.mailchimp_api.urls')),
     url(r'^$', FuzzyLanguageRedirectView.as_view()),
+    url(r'', include('feincms.contrib.preview.urls')),
     url(r'', include('feincms.urls')),
 )
 

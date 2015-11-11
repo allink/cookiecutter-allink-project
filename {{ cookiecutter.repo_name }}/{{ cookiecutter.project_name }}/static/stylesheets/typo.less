@@ -1,19 +1,87 @@
 @import 'lib.less';
 
-.nav-font() {
-    color: @black;
+.link {
+}
 
-    &:hover,
-    &:hover:focus {
-        color: @black-hover;
+.text {
+    font-size: @small-xs;
+    line-height: 1.3em;
+
+    @media (min-width: @screen-sm-min) {
+        font-size: @small-sm;
+    }
+
+    @media (min-width: @screen-md-min) {
+        font-size: @small;
     }
 }
 
-.nav-font-active() {
-    color: @active-color;
+.text-small {
+    font-size: @small;
+    line-height: 1.2em;
 
-    &:hover,
-    &:hover:focus {
-        color: @active-color-hover;
+    @media (min-width: @screen-sm-min) {
+        font-size: @small-sm;
+    }
+
+    @media (min-width: @screen-md-min) {
+        font-size: @small;
     }
 }
+
+.text-big {
+    font-size: @medium;
+    line-height: 1.3em;
+
+    @media (min-width: @screen-sm-min) {
+        font-size: @medium-sm;
+    }
+
+    @media (min-width: @screen-md-min) {
+        font-size: @medium;
+    }
+}
+
+.h1 {
+    font-size: @large;
+    line-height: 1.2em;
+
+    @media (min-width: @screen-sm-min) {
+        font-size: @large-sm;
+    }
+
+    @media (min-width: @screen-md-min) {
+        font-size: @large;
+    }
+}
+
+.h2 {
+    font-size: @big;
+    line-height: 1.2em;
+
+    @media (min-width: @screen-sm-min) {
+        font-size: @big-sm;
+    }
+
+    @media (min-width: @screen-md-min) {
+        font-size: @big;
+    }
+}
+
+.h3 {
+    font-size: @medium;
+    line-height: 1.2em;
+
+    @media (min-width: @screen-sm-min) {
+        font-size: @medium-sm;
+    }
+
+    @media (min-width: @screen-md-min) {
+        font-size: @medium;
+    }
+}
+
+.h4 {
+    .h3;
+}
+

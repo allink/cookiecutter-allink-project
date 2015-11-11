@@ -1,0 +1,142 @@
+@import "variables.less";
+@import "lib.less";
+@import "mixins.less";
+@import "../lib/bootstrap/less/mixins.less";
+
+/****** CLASSIC BUTTONS *******/
+.btn {
+    border: none;
+    padding: @btn-padding;
+    border-radius: @radius;
+    .transition(background 200ms);
+    .link-color(white, white);
+    .background-link-color(CornflowerBlue; lighten(CornflowerBlue, 10%));
+    &:active {
+        .box-shadow(none);
+    }
+    &:hover {
+        border-bottom: none;
+    }
+}
+
+.btn-icon {
+    font-size: @icon-size;
+    line-height: 0.8;
+}
+
+.btn-big {
+    padding: 20px 25px;
+}
+
+
+/****** OUTLINE BUTTONS *******/
+
+/*** BASIC OUTLINE BUTTON ***/
+.btn-outline {
+    line-height: 1em;
+    border-radius: 25px;
+    background: none;
+    display: inline-block;
+    outline: none;
+    border: 2px solid black;
+    color: black;
+    .transition(background 200ms);
+    &:hover {
+        border: 2px solid black;
+        color: black;
+        background: AliceBlue;
+    }
+}
+/*** FILL BUTTON ***/
+.btn-outline-sliding {
+    line-height: 1em;
+    border-radius: 0;
+    background: none;
+    display: inline-block;
+    outline: none;
+    position: relative;
+    border: 2px solid black;
+    color: black;
+    z-index: 0;
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        background: AliceBlue;
+        .transition(height 300ms);
+    }
+
+    &:hover,
+    &:focus,
+    &:focus:hover {
+        border: 2px solid black;
+        color: black;
+    }
+
+    &:focus {
+        outline: none;
+        text-decoration: none;
+    }
+
+    &.slide {
+        &:after {
+            width: 100%;
+            height: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        &:hover:after {
+            height: 100%;
+        }
+    }
+}
+/*** OUTLINE BUTTON with Icon ***/
+.btn-outline-icon {
+    line-height: 1em;
+    border-radius: 0;
+    background: AliceBlue;
+    display: inline-block;
+    outline: none;
+    border: 2px solid black;
+    color: black;
+    padding-left: 40px;
+    position: relative;
+    overflow: hidden;
+    .transition(background 200ms);
+
+    &, &.arrow-right {
+        padding-right: 40px;
+    }
+
+    &:hover {
+        border: 2px solid black;
+        color: black;
+        background: darken(AliceBlue, 10%);
+        &:before {
+            left: 84%;
+        }
+    }
+}
+
+/*** OUTLINE BUTTON on hover ***/
+.btn-outline-hover {
+    border-radius: 0;
+    background: AliceBlue;
+    outline: none;
+    border: 3px solid AliceBlue;
+    color: black;
+    .transition(border 200ms);
+    &:hover {
+        border: 3px solid CornflowerBlue;
+        color: black;
+    }
+}
+
+.btn-cart {
+    .icon-left(@padding-left: 2.6em; @icon: "\e2df"; @icon-size: 1.5em; @icon-left: 0.5em;);
+}
+
+.arrow-right {
+    .icon-right(@padding-right: 2.2em; @icon: "\e111"; @icon-size: 1.5em; @icon-right: 0.7em;);
+}

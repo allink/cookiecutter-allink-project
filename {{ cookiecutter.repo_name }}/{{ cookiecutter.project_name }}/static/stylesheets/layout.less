@@ -18,6 +18,46 @@ header {
     background: @demo-bg;       //demo
 }
 
+h1, h2, h3, h4, h5, h6,
+ul, ol, dd,
+p, figure, address,
+pre, table, fieldset, hr {
+    &:first-child { margin-top: 0; }
+    &:last-child { margin-bottom: 0; }
+}
+
+h2, h4, h5, h6,
+ul, ol, dd,
+p, figure, address,
+pre, table, fieldset, hr {
+    margin: 20px 0 0 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.1em;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+p + img {
+    margin-top: 20px;
+}
+
+p.intro + p {
+    margin-top: 40px;
+}
+h1 + p.intro {
+    margin-top: 40px;
+}
+.list-title  + .simple-list {
+    margin-top: 10px;
+}
 // sticky footer
 
 body {
@@ -78,18 +118,6 @@ body {
         position: absolute;
         height: 100%;
         z-index: -1;
-    }
-}
-
-footer {
-    background: @demo-bg;       //demo
-
-    .content {
-        padding-top: 20px; padding-bottom: 20px;
-    }
-
-    > .container {
-        background: @demo-bg;       //demo
     }
 }
 

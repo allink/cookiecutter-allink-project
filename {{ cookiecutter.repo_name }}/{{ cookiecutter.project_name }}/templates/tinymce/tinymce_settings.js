@@ -1,9 +1,9 @@
 {% raw %}
-autoresize_min_height: '300px',
 width: '615px',
+height: '400px',
 link_list: '/admin/tinymce_links.js',
 valid_children : '+body[style]',
-plugins: 'fullscreen paste link code visualblocks autoresize image',
+plugins: 'fullscreen paste link code visualblocks image',
 paste_auto_cleanup_on_paste: true,
 paste_as_text: true,
 relative_urls: false,
