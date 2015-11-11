@@ -13,6 +13,6 @@ psycopg2
 allink-essentials>=1.0.0,<2.0.0
 mailchimp
 dj-database-url
-django-cache-url
+django-cache-url==0.8.0
 django-dotenv
 django-getenv

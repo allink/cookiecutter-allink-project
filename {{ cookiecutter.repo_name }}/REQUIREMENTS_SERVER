@@ -1,6 +1,6 @@
 hiredis
-redis
-django-redis
+redis==2.10.3
+django-redis==3.8.4
 newrelic
 gunicorn
 django-lockdown
