@@ -12,11 +12,12 @@ Page.register_extensions(
 )
 
 Page.register_templates({
-    'key': 'base',
-    'title': 'Base',
-    'path': 'base.html',
+    'key': 'content',
+    'title': 'Inhalt',
+    'path': 'content.html',
     'regions': (
-        ('main', 'Main Region'),
+        ('main', 'Haupt Inhalt'),
+        ('header', 'Header'),
     ),
 })
 

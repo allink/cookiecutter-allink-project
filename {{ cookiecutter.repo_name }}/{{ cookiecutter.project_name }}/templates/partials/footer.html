@@ -1,0 +1,47 @@
+{% raw %}{% load in_footer %}
+
+<footer>
+    <!-- KONTAKT + NEWSLETTER ROW -->
+    <div class="colored-row padding-row-xs-medium">
+        <div class="container-fluid max-width">
+            <div class="row">
+                <div class="col-xs-24 col-sm-offset-2 col-sm-10 col-md-8 col-md-offset-4 text-center">
+                    <address>
+                        <h3>Firma AG</h3>
+                        Strasse 00<br>
+                        0000 Stadt<br>
+                        +41 (0) 7156 96 66 441<br>
+                        <a href="mailto:mail@mail.com">mail@mail.com</a>
+                    </address>
+                </div>
+                <div class="col-xs-24 col-sm-10 col-md-8 text-center spacing-xs-big-only">
+                    <h3>Newsletter abonnieren:</h3>
+                    <p>Erhalten Sie regelmässige Neuigkeiten sowie exklusive Angebote</p>
+                    <div class="mailchimp-result spacing-xs-medium">
+                        {% include "mailchimp_api/signup_form.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="colored-row padding-row-xs-small">
+        <div class="container-fluid max-width">
+            <div class="row">
+                <div class="col-xs-24 text-center">
+                    {% footer_navigation for feincms_page as footer_pages %}
+                    <nav class="footer-nav text-center">
+                        <ul>
+                            {% for p in footer_pages %}
+                                <li>
+                                    <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>{% endraw %}

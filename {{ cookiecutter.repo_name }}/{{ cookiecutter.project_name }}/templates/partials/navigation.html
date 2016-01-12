@@ -1,0 +1,42 @@
+{% raw %}{% load feincms_tags feincms_page_tags mptt_tags %}
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="inner">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    {% feincms_nav feincms_page level=2 depth=2 as navitems %}
+                    {% recursetree navitems %}
+                        {% if children %}
+                            <li {% if node|is_equal_or_parent_of:feincms_page %}class="active"{% endif %}>
+                                <a href="{{ node.get_absolute_url }}" class="dropdown-toggle" data-toggle="dropdown">{{ node.title }}</a>
+                                    <ul class="dropdown-menu">
+                                        {{ children }}
+                                    </ul>
+                            </li>
+                        {% else %}
+                            <li {% if node|is_equal_or_parent_of:feincms_page %}class="active"{% endif %}>
+                                <a href="{{ node.get_absolute_url }}">{{ node.title }}</a>
+                            </li>
+                        {% endif %}
+                    {% endrecursetree %}
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% feincms_languagelinks for feincms_page as languagelinks existing %}
+                    {% for key, name, link in languagelinks %}
+                    <li{% if key == feincms_page.language %} class="active"{% endif %} ><a href="{{ link }}">{{ key }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>{% endraw %}
