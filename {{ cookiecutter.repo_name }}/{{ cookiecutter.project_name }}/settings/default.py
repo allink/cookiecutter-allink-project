@@ -239,7 +239,7 @@ FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
 
 
 PIPELINE = {
-    'PIPELINE_ENABLED': True,
+    'PIPELINE_ENABLED': False,
     'JAVASCRIPT': {
         'main': {
             'source_filenames': (
