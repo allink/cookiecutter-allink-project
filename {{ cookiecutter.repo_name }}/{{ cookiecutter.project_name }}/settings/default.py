@@ -241,6 +241,8 @@ FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
 PIPELINE_CSS = {
     'main': {
         'source_filenames': (
+            'icomoon/style.css',
+            'lib/slick/slick.css',
             'stylesheets/base.less',
         ),
         'output_filename': 'css/main.css',
