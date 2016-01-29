@@ -1,14 +1,14 @@
-Django>=1.8,<1.9
+Django>=1.9,<1.10
 django-mptt
 FeinCMS>=1.11,<1.12
 Pillow
 django-robots
-django-pipeline
+django-pipeline>=1.6,<1.7
 cssmin
 django-debug-toolbar
 pytz
 raven
-https://github.com/matthiask/django-admin-sso/zipball/8fcc5e2f92b18ae57a500f798e2b2973497c4cf6
+https://github.com/matthiask/django-admin-sso/zipball/7e61163dea492796ea077fb7cf84c60419ac923c
 psycopg2
 allink-essentials>=1.0.0,<2.0.0
 mailchimp

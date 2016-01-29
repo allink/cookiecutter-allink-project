@@ -1,16 +1,23 @@
 {% raw %}{% extends "base.html" %}
 
 {% comment %}
-    Needs 'feincms.context_processors.add_page_if_missing',
-    only working on production env
+    feincms_page is added by custom 404 view from essentials,
+    don't use add_page_if_missing middleware!
 {% endcomment %}
 
-{% block title %}
-    Seite nicht vorhanden - Page not available
-{% endblock title %}
+{% block title_tag %}Seite nicht gefunden{% endblock %}
+{% block og_title %}Seite nicht gefunden{% endblock %}
+
+{% block navigation %}
+    {% if feincms_page %}
+        {{block.super}}
+    {% endif %}
+{% endblock %}
 
 {% block main %}
-    Die angeforderte Seite ist nicht vorhanden.<br/>
-    The requested page is not available.
-{% endblock main %}
+    <h1>Die angeforderte Seite ist nicht vorhanden.</h1>
+    {% if not feincms_page %}
+        <a href="/">Zurück zur Startseite</a>
+    {% endif %}
+{% endblock %}
 {% endraw %}

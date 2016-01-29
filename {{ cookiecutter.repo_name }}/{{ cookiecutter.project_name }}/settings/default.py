@@ -82,7 +82,7 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 # = Django-specific Modules =
 # ===========================
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,7 +92,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.versions.VersionsPanel',
@@ -132,7 +132,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'feincms.context_processors.add_page_if_missing',  # used by 404 page
 )
 
 TEMPLATE_LOADERS = (
@@ -238,48 +237,49 @@ FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
 # = Pipeline settings =
 # =====================
 
-PIPELINE_CSS = {
-    'main': {
-        'source_filenames': (
-            'icomoon/style.css',
-            'lib/slick/slick.css',
-            'stylesheets/base.less',
-        ),
-        'output_filename': 'css/main.css',
-        'variant': 'datauri',
+
+PIPELINE = {
+    'PIPELINE_ENABLED': True,
+    'JAVASCRIPT': {
+        'main': {
+            'source_filenames': (
+                'lib/jquery-1.11.0.js',
+                'lib/jquery.sticky.js',
+                'lib/bootstrap/js/transition.js',
+                'lib/bootstrap/js/dropdown.js',
+                'lib/bootstrap/js/collapse.js',
+                'javascript/main.js',
+            ),
+            'output_filename': 'js/main.js',
+        },
+        'ie9': {
+            'source_filenames': (
+                'lib/jquery.placeholder.js',
+                'javascript/ie9.js',
+            ),
+            'output_filename': 'js/ie9.js',
+        },
     },
-}
-
-PIPELINE_JS = {
-    'main': {
-        'source_filenames': (
-            'lib/jquery-1.11.0.js',
-            'lib/jquery.sticky.js',
-            'lib/bootstrap/js/transition.js',
-            'lib/bootstrap/js/dropdown.js',
-            'lib/bootstrap/js/collapse.js',
-            'javascript/main.js',
-        ),
-        'output_filename': 'js/main.js',
+    'STYLESHEETS': {
+        'main': {
+            'source_filenames': (
+                'icomoon/style.css',
+                'lib/slick/slick.css',
+                'stylesheets/base.less',
+            ),
+            'output_filename': 'css/main.css',
+            'variant': 'datauri',
+        },
     },
-    'ie9': {
-        'source_filenames': (
-            'lib/jquery.placeholder.js',
-            'javascript/ie9.js',
-        ),
-        'output_filename': 'js/ie9.js',
-    }
+    'COMPILERS': (
+        'pipeline.compilers.less.LessCompiler',
+    ),
+    'LESS_BINARY': os.path.join(BASE_DIR, 'node_modules', '.bin', 'lessc'),
+    'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
+    'CSSMIN_BINARY': os.path.join(BASE_DIR, 'node_modules', '.bin', 'cssmin'),
+    'JS_COMPRESSOR': 'pipeline.compressors.uglifyjs.UglifyJSCompressor',
+    'UGLIFYJS_BINARY': os.path.join(BASE_DIR, 'node_modules', '.bin', 'uglifyjs'),
 }
-
-PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
-)
-
-PIPELINE_LESS_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'lessc')
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
-PIPELINE_CSSMIN_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'cssmin')
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
-PIPELINE_UGLIFYJS_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'uglifyjs')
 
 # ==========
 # = Celery =

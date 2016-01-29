@@ -13,16 +13,21 @@ sitemaps = {
     'pages': PageSitemap,
 }
 
+# For Django < 1.9 use 'allink_essentials.view.page_not_found.page_not_found'
+# With this 404 handler we don't need add_page_if_missing, which doesn't work
+# together with feincms_page preview.
+handler404 = 'allink_essentials.view.v2.page_not_found.page_not_found'
+
 urlpatterns = patterns('',
     url(r'^admin/tinymce_links\.js$', '{{ cookiecutter.project_name }}.views.get_tiny_mce_links'),
     # Used for tinymce in Application
     # url(r'^admin/tinymce_settings\.js$', TemplateView.as_view(template_name='tinymce/app_settings.js')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^robots\.txt$', include('robots.urls')),
+    url(r'^robots\.txt', include('robots.urls')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'^404/$', 'django.views.defaults.page_not_found'),
     url(r'^500/$', 'django.views.defaults.server_error'),
-    url(r'^mailchimp/$', include('allink_essentials.mailchimp_api.urls')),
+    url(r'^mailchimp/', include('allink_essentials.mailchimp_api.urls')),
     url(r'^$', FuzzyLanguageRedirectView.as_view()),
     url(r'', include('feincms.contrib.preview.urls')),
     url(r'', include('feincms.urls')),
