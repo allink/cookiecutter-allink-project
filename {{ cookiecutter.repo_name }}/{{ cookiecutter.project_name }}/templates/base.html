@@ -1,4 +1,4 @@
-{% raw %}{% load feincms_tags feincms_page_tags analytics_tags pipeline staticfiles %}
+{% load feincms_tags feincms_page_tags analytics_tags pipeline staticfiles %}
 <!DOCTYPE html>
 <html lang="{{ feincms_page.language }}">
     <head>
@@ -44,15 +44,17 @@
         {% google_tag_manager %}
         <header>
             {% include "partials/navigation.html" %}
-            {% feincms_render_region feincms_page "header" request %}
+            {% block header %}{% endblock %}
         </header>
-        {% block main %}
-            {% feincms_render_region feincms_page "main" request %}
-        {% endblock %}
+        <div class="main">
+            {% block main %}
+                {% feincms_render_region feincms_page "main" request %}
+            {% endblock %}
+        </div>
         {% include "partials/footer.html" %}
         {% javascript 'main' %}
         <!--[if lte IE 9]>
             {% javascript 'ie9' %}
         <![endif]-->
     </body>
-</html>{% endraw %}
+</html>
