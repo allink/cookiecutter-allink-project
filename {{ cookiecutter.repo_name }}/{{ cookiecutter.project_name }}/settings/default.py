@@ -16,7 +16,7 @@ ALLOWED_HOSTS = ["*"]
 LANGUAGE_CODE = 'de'
 LANGUAGES = (
     ('de', 'German'),
-    ('en', 'English'),
+    # ('en', 'English'),
     # ('fr', 'French'),
 )
 TIME_ZONE = 'Europe/Zurich'
