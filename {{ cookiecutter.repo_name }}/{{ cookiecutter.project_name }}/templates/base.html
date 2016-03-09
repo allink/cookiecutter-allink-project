@@ -1,4 +1,4 @@
-{% load feincms_tags feincms_page_tags analytics_tags pipeline staticfiles %}
+{% raw %}{% load feincms_tags feincms_page_tags analytics_tags pipeline staticfiles %}
 <!DOCTYPE html>
 <html lang="{{ feincms_page.language }}">
     <head>
@@ -57,4 +57,4 @@
             {% javascript 'ie9' %}
         <![endif]-->
     </body>
-</html>
+</html>{% endraw %}
