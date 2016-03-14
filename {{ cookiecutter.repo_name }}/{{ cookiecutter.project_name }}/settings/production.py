@@ -66,3 +66,6 @@ TEMPLATES = [
 # ===========================
 
 MIDDLEWARE_CLASSES += ['allink_essentials.middleware.validate_host_middleware.ValidateHostMiddleware']
+
+
+PIPELINE['PIPELINE_ENABLED'] = True

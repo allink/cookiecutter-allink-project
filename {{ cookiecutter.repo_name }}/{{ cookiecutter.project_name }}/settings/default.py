@@ -16,7 +16,7 @@ ALLOWED_HOSTS = ["*"]
 LANGUAGE_CODE = 'de'
 LANGUAGES = (
     ('de', 'German'),
-    ('en', 'English'),
+    # ('en', 'English'),
     # ('fr', 'French'),
 )
 TIME_ZONE = 'Europe/Zurich'
@@ -241,8 +241,9 @@ FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
 # = Pipeline settings =
 # =====================
 
+
 PIPELINE = {
-    'PIPELINE_ENABLED': True,
+    'PIPELINE_ENABLED': False,
     'JAVASCRIPT': {
         'main': {
             'source_filenames': (
@@ -266,6 +267,8 @@ PIPELINE = {
     'STYLESHEETS': {
         'main': {
             'source_filenames': (
+                'icomoon/style.css',
+                'lib/slick/slick.css',
                 'stylesheets/base.less',
             ),
             'output_filename': 'css/main.css',

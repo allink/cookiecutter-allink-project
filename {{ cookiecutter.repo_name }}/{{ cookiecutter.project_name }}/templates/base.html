@@ -44,11 +44,13 @@
         {% google_tag_manager %}
         <header>
             {% include "partials/navigation.html" %}
-            {% feincms_render_region feincms_page "header" request %}
+            {% block header %}{% endblock %}
         </header>
-        {% block main %}
-            {% feincms_render_region feincms_page "main" request %}
-        {% endblock %}
+        <div class="main">
+            {% block main %}
+                {% feincms_render_region feincms_page "main" request %}
+            {% endblock %}
+        </div>
         {% include "partials/footer.html" %}
         {% javascript 'main' %}
         <!--[if lte IE 9]>
