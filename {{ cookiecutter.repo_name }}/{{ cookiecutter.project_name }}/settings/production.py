@@ -5,7 +5,6 @@ from .default import *  # noqa
 # ===================
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 
 # ===================
 # = Server Settings =
@@ -42,6 +41,7 @@ TEMPLATES = [
         'APP_DIRS': False,
         'DIRS': [os.path.join(BASE_DIR, 'meinau', 'templates')],
         'OPTIONS': {
+            'debug': False,
             'loaders': [
                 ('django.template.loaders.cached.Loader', [
                     'django.template.loaders.filesystem.Loader',

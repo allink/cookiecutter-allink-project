@@ -126,6 +126,7 @@ TEMPLATES = [
         'APP_DIRS': False,
         'DIRS': [os.path.join(BASE_DIR, 'meinau', 'templates')],
         'OPTIONS': {
+            'debug': True,
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader'

@@ -7,7 +7,6 @@ import os
 # ===================
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 # ===================
 # = Server Settings =
