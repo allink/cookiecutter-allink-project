@@ -1,4 +1,4 @@
-Django>=1.9,<1.10
+Django>=1.8,<1.9
 django-mptt
 FeinCMS>=1.11,<1.12
 Pillow
