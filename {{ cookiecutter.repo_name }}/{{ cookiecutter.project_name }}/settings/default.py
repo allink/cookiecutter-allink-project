@@ -165,7 +165,7 @@ INSTALLED_APPS = (
     'robots',
     'allink_essentials.analytics',
     'debug_toolbar',
-    'raven.contrib.django',
+    'raven.contrib.django.raven_compat',
     'admin_sso',
     # 'djcelery',
     '{{ cookiecutter.project_name }}',
@@ -202,7 +202,7 @@ LOGGING = {
     'handlers': {
         'sentry': {
             'level': 'WARNING',
-            'class': 'raven.contrib.django.handlers.SentryHandler',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
             'filters': ['require_debug_false', 'skip_unreadable_posts'],
         },
         'console': {
