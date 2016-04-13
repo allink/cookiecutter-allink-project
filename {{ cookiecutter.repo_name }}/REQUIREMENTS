@@ -1,4 +1,4 @@
-Django>=1.8,<1.9
+Django>=1.9,<1.10
 django-mptt
 https://github.com/feincms/feincms/zipball/0700875b32f164c8df6f1a024c088c5e570a37cf
 Pillow

@@ -16,7 +16,7 @@ sitemaps = {
 # For Django < 1.9 use 'allink_essentials.view.page_not_found.page_not_found'
 # With this 404 handler we don't need add_page_if_missing, which doesn't work
 # together with feincms_page preview.
-handler404 = 'allink_essentials.view.page_not_found.page_not_found'
+handler404 = 'allink_essentials.view.v2.page_not_found.page_not_found'
 
 urlpatterns = patterns('',
     url(r'^admin/tinymce_links\.js$', '{{ cookiecutter.project_name }}.views.get_tiny_mce_links'),
