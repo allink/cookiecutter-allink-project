@@ -248,6 +248,8 @@ PIPELINE = {
                 'lib/bootstrap/js/transition.js',
                 'lib/bootstrap/js/dropdown.js',
                 'lib/bootstrap/js/collapse.js',
+                'lib/modernizr-custom.js',
+                'javascript/lib.js',
                 'javascript/main.js',
             ),
             'output_filename': 'js/main.js',

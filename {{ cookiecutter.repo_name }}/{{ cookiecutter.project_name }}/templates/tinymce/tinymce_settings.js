@@ -13,8 +13,8 @@ toolbar: 'insertfile undo redo | styleselect | bold | bullist numlist | link | c
 menubar : false,
 visualblocks_default_state: true,
 style_formats: [
-    {title: 'H1', block: 'h1'},
     {title: 'H2', block: 'h2'},
+    {title: 'H3', block: 'h3'},
     {title: 'Paragraph', block: 'p'}
 ],
 file_browser_callback: function(field_name, url, type, win) {
