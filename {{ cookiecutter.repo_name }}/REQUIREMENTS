@@ -1,6 +1,6 @@
 Django>=1.9,<1.10
 django-mptt
-FeinCMS>=1.11,<1.12
+https://github.com/feincms/feincms/zipball/0700875b32f164c8df6f1a024c088c5e570a37cf
 Pillow
 django-robots
 django-pipeline>=1.6,<1.7

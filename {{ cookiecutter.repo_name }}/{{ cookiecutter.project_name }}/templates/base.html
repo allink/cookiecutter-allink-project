@@ -23,10 +23,10 @@
         <meta name="description" content="{{ feincms_page.meta_description }}">
         <meta property="og:title" content="{{ feincms_page.title_tag }} | allink GmbH"/>
         <meta property="og:description" content="{{ feincms_page.meta_description }}"/>
-        <link rel="icon" type="image/gif" href="{% static 'images/favicons/favicon.gif' %}">
-        <link rel="apple-touch-icon" sizes="114×114" href="{% static 'images/favicons/clip-icon-iphone4.png' %}" />
-        <link rel="apple-touch-icon" sizes="72×72" href="{% static 'images/favicons/clip-icon-ipad.png' %}" />
-        <link rel="apple-touch-icon" sizes="52×52" href="{% static 'images/favicons/clip-icon-iphone.png' %}" />
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicons/favicon.ico' %}">
+        <link rel="apple-touch-icon" sizes="114×114" href="{% static 'images/favicons/apple-touch-icon-114x114.png' %}" />
+        <link rel="apple-touch-icon" sizes="72×72" href="{% static 'images/favicons/apple-touch-icon-72x72.png' %}" />
+        <link rel="apple-touch-icon" sizes="57×57" href="{% static 'images/favicons/apple-touch-icon-57x57.png' %}" />
         {% if feincms_page.og_image %}
             <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{{ feincms_page.og_image.url }}" />
         {% else %}
