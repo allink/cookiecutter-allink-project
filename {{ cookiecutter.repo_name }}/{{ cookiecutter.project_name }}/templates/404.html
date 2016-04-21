@@ -1,4 +1,4 @@
-{% raw %}{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% comment %}
     feincms_page is added by custom 404 view from essentials,
@@ -15,9 +15,17 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Die angeforderte Seite ist nicht vorhanden.</h1>
-    {% if not feincms_page %}
-        <a href="/">Zurück zur Startseite</a>
-    {% endif %}
+    <div class="contenttype text">
+        <div class="container-fluid max-width">
+            <div class="row">
+                <div class="col-xs-24">
+                    <p>Die angeforderte Seite ist nicht vorhanden.</p>
+                    {% if not feincms_page %}
+                        <a href="/">Zurück zur Startseite</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-{% endraw %}
+
