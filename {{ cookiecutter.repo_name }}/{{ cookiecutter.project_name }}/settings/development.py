@@ -20,3 +20,9 @@ DEFAULT_FILE_STORAGE = 'allink_essentials.storage.ascii_file_system_storage.ASCI
 # ================
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'compiled_static')
+
+# =====================
+# = Pipeline settings =
+# =====================
+
+PIPELINE['LESS_ARGUMENTS'] = '--line-numbers=\'comments\''
