@@ -1,4 +1,5 @@
 from .default import *  # noqa
+# import djcelery
 
 # ===================
 # = Global Settings =
@@ -61,3 +62,6 @@ MIDDLEWARE_CLASSES += ['allink_essentials.middleware.validate_host_middleware.Va
 
 
 PIPELINE['PIPELINE_ENABLED'] = True
+
+# load celery
+# djcelery.setup_loader()
