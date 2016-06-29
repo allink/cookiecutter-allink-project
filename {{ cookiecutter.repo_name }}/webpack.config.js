@@ -9,7 +9,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const parts = require('./webpack/lib');
 
-const STATIC_ROOT = path.join(__dirname, '{{cookiecuter.project_name}}/static');
+const STATIC_ROOT = path.join(__dirname, '{{cookiecutter.project_name}}/static');
 
 const PATHS = {
     app: path.join(STATIC_ROOT, 'javascript/app'),

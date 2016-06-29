@@ -30,25 +30,18 @@ CHECKS = [
         'print_filename': True,
     },
     {
-        'output': 'Checking for console.log()...',
-        'command': 'grep -n console.log %s',
-        'ignore_files': ['.*/static/lib/.*', '.*styleguide/.*', '.*node_modules/*'],
-        'match_files': ['.*\.js$'],
-        'print_filename': True,
-    },
-    {
         'output': 'Checking for debugger...',
         'command': 'grep -n debugger %s',
         'match_files': ['.*\.js$'],
         'print_filename': True,
     },
     {
-       'output': 'Running Jshint...',
-       # By default, jshint prints 'Lint Free!' upon success. We want to filter this out.
-       'command': 'jshint %s | grep -v "Lint Free!"',
-       'match_files': ['.*\.js$'],
-       'ignore_files': ['.*/static/lib/.*', '.*styleguide/.*', '.*node_modules/*'],
-       'print_filename': False,
+        'output': 'Running Jshint...',
+        # By default, jshint prints 'Lint Free!' upon success. We want to filter this out.
+        'command': 'jshint %s | grep -v "Lint Free!"',
+        'match_files': ['.*\.js$'],
+        'ignore_files': ['.*/static/lib/.*', '.*styleguide/.*', '.*node_modules/*', '.*build/*'],
+        'print_filename': False,
     },
     {
         'output': 'Running flake8...',
@@ -56,14 +49,7 @@ CHECKS = [
         'match_files': ['.*\.py$'],
         'ignore_files': ['.*migrations.*'],
         'print_filename': False,
-    },
-    {
-        'output': 'Checking for less changes...',
-        'command': './node_modules/.bin/lessc %s > /dev/null',
-        'match_files': ['.*\.less$'],
-        'ignore_files': ['.*/static/lib/.*', '.*styleguide/.*', '.*node_modules/*'],
-        'print_filename': True,
-    },
+    }
 ]
 
 
