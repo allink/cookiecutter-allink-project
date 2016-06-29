@@ -1,4 +1,5 @@
 from .default import *  # noqa
+# import djcelery
 
 import os
 
@@ -15,6 +16,7 @@ THUMBNAIL_DEBUG = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FILE_STORAGE = 'allink_essentials.storage.ascii_file_system_storage.ASCIIFileSystemStorage'
+CELERY_RESULT_PERSISTENT = False
 
 # ================
 # = File serving =
@@ -35,3 +37,6 @@ WEBPACK_LOADER = {
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     }
 }
+
+# load celery
+# djcelery.setup_loader()

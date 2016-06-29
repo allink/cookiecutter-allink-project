@@ -1,4 +1,5 @@
 from .default import *  # noqa
+# import djcelery
 
 # ===================
 # = Global Settings =
@@ -87,3 +88,6 @@ WEBPACK_LOADER = {
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     }
 }
+
+# load celery
+# djcelery.setup_loader()

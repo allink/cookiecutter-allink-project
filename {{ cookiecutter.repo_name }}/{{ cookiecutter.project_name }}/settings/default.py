@@ -3,6 +3,7 @@ import re
 from getenv import env
 import dj_database_url
 import django_cache_url
+# from celery.task.schedules import crontab
 
 # ===================
 # = Global Settings =
@@ -249,10 +250,14 @@ CELERYBEAT_SCHEDULE = {
     #     'task': 'tasks.print',
     #     'schedule': timedelta(seconds=30)
     # },
+    # 'detect_overdue_invoices': {
+    #     'task': 'oscar_apps.order.tasks.invoice_overdue_task',
+    #     'schedule': crontab(hour=3, minute=13),
+    # },
 }
 
 BROKER_URL = env('BROKER_URL', None)
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', None)
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', 'rpc://')
 CELERYD_CONCURRENCY = env('CELERYD_CONCURRENCY', 1)
 CELERY_SEND_EVENTS = False
 CELERY_ENABLE_UTC = True
