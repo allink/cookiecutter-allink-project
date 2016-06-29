@@ -1,6 +1,7 @@
-{% raw %}{% load feincms_tags feincms_page_tags analytics_tags pipeline staticfiles %}
+{% raw %}{% load feincms_tags feincms_page_tags analytics_tags staticfiles %}
+{% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
-<html lang="{{ feincms_page.language }}">
+<html>
     <head>
         <!--
 
@@ -19,42 +20,68 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ feincms_page.title_tag }} | allink GmbH</title>
+        <title>{{ feincms_page.title_tag }} | {{ universe.page_title_appendix }}</title>
         <meta name="description" content="{{ feincms_page.meta_description }}">
-        <meta property="og:title" content="{{ feincms_page.title_tag }} | allink GmbH"/>
+        <meta property="og:title" content="{{ feincms_page.title_tag }} | {{ universe.page_title_appendix }}"/>
         <meta property="og:description" content="{{ feincms_page.meta_description }}"/>
-        <link rel="icon" type="image/x-icon" href="{% static 'images/favicons/favicon.ico' %}">
-        <link rel="apple-touch-icon" sizes="114×114" href="{% static 'images/favicons/apple-touch-icon-114x114.png' %}" />
-        <link rel="apple-touch-icon" sizes="72×72" href="{% static 'images/favicons/apple-touch-icon-72x72.png' %}" />
-        <link rel="apple-touch-icon" sizes="57×57" href="{% static 'images/favicons/apple-touch-icon-57x57.png' %}" />
+
+        <!-- Favicon Set -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicons/apple-touch-icon-57x57.png' %}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicons/apple-touch-icon-60x60.png' %}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicons/apple-touch-icon-72x72.png' %}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicons/apple-touch-icon-76x76.png' %}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicons/apple-touch-icon-114x114.png' %}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicons/apple-touch-icon-120x120.png' %}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicons/apple-touch-icon-144x144.png' %}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicons/apple-touch-icon-152x152.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon-180x180.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon-32x32.png' %}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{% static 'images/favicons/android-chrome-192x192.png' %}" sizes="192x192">
+        <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon-96x96.png' %}" sizes="96x96">
+        <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon-16x16.png' %}" sizes="16x16">
+        <link rel="manifest" href="{% static 'images/favicons/manifest.json' %}">
+        <link rel="mask-icon" href="{% static 'images/favicons/safari-pinned-tab.svg' %}" color="#282828">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+        <link href="//cloud.webtype.com/css/3032e116-8b11-4fd1-b407-b8f0cc25d3f4.css" rel="stylesheet" type="text/css" />
+
         {% if feincms_page.og_image %}
             <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{{ feincms_page.og_image.url }}" />
-        {% else %}
-            <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{% static 'images/facebook.jpg' %}" />
+        {% elif universe.main_og_image %}
+            <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}{{ universe.main_og_image.url }}" />
         {% endif %}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        {% stylesheet 'main' %}
+
+        {% render_bundle 'style' 'css' %}
+
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        {{universe.code_header|default:''|safe}}
     </head>
     <body>
-        {% google_tag_manager %}
-        <header>
-            {% include "partials/navigation.html" %}
-            {% block header %}{% endblock %}
-        </header>
-        <div class="main">
+        {% block body %}
+            {% include "universe/analytics/google-tag-manager.html" %}
+
+            {{universe.code_body_top|default:''|safe}}
+
+            <header class="site-header {{universe.header_gallery_size}}">
+                {% include "universe/layout/navigation/navigation.html" %}
+                {% block header %}{% endblock %}
+            </header>
+
             {% block main %}
-                {% feincms_render_region feincms_page "main" request %}
             {% endblock %}
-        </div>
-        {% include "partials/footer.html" %}
-        {% javascript 'main' %}
-        <!--[if lte IE 9]>
-            {% javascript 'ie9' %}
-        <![endif]-->
+
+            {% include universe.footer_layout_tempalte %}
+
+            {% include "universe/partials/photoswipe.html" %}
+            {% render_bundle 'app' %}
+        {% endblock %}
     </body>
 </html>{% endraw %}

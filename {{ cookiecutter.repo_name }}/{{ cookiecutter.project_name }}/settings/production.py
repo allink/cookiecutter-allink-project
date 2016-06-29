@@ -59,5 +59,31 @@ TEMPLATES = [
 
 MIDDLEWARE_CLASSES += ['allink_essentials.middleware.validate_host_middleware.ValidateHostMiddleware']
 
+# ===========================
+# = Django-specific Modules =
+# ===========================
 
-PIPELINE['PIPELINE_ENABLED'] = True
+INSTALLED_APPS += ('lockdown',)
+LOCKDOWN_PASSWORDS = ('stage',)
+LOCKDOWN_URL_EXCEPTIONS = (
+    r'^/robots.txt$',   # unlock /about/
+)
+
+MIDDLEWARE_CLASSES += (
+    'allink_essentials.middleware.validate_host_middleware.ValidateHostMiddleware',
+    'lockdown.middleware.LockdownMiddleware'
+)
+
+# ===========
+# = Webpack =
+# ===========
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': True,
+        'BUNDLE_DIR_NAME': 'build/',
+        'STATS_FILE': os.path.join(BASE_DIR, '{{cookiecutter.project_name}}', 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}

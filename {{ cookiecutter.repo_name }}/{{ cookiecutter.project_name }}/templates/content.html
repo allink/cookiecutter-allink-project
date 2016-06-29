@@ -1,6 +1,15 @@
-{% raw %}{% extends "base.html" %}
+{% raw %}{% extends base_template|default:"base.html" %}
 {% load feincms_tags %}
 
+{% block header %}
+	{% if feincms_page.content.header %}
+		{% feincms_render_region feincms_page "header" request %}
+	{% endif %}
+{% endblock %}
+
 {% block main %}
-    {% feincms_render_region feincms_page "main" request %}
-{% endblock main %}{% endraw %}
+	<section class="page-content-wrapper">
+    	{% feincms_render_region feincms_page "main" request %}
+	</section>
+{% endblock main %}
+{% endraw %}

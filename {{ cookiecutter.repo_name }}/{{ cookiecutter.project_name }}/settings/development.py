@@ -7,6 +7,7 @@ import os
 # ===================
 
 DEBUG = True
+THUMBNAIL_DEBUG = True
 
 # ===================
 # = Server Settings =
@@ -21,8 +22,16 @@ DEFAULT_FILE_STORAGE = 'allink_essentials.storage.ascii_file_system_storage.ASCI
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'compiled_static')
 
-# =====================
-# = Pipeline settings =
-# =====================
+# ===========
+# = Webpack =
+# ===========
 
-PIPELINE['LESS_ARGUMENTS'] = '--line-numbers=\'comments\''
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': False,
+        'BUNDLE_DIR_NAME': 'build/',
+        'STATS_FILE': os.path.join(BASE_DIR, '{{cookiecutter.project_name}}', 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}

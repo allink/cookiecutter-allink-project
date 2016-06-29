@@ -3,7 +3,6 @@ django-mptt
 https://github.com/feincms/feincms/zipball/0700875b32f164c8df6f1a024c088c5e570a37cf
 Pillow
 django-robots
-django-pipeline>=1.6,<1.7
 cssmin
 django-debug-toolbar
 pytz
@@ -16,3 +15,9 @@ dj-database-url
 django-cache-url==0.8.0
 django-dotenv
 django-getenv
+django-webpack-loader
+django-solo
+sorl-thumbnail
+django-picklefield
+django-widget-tweaks
+django-import-export

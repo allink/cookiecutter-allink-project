@@ -1,8 +1,44 @@
 {
+  "main": "webpack.config.js",
   "dependencies": {
-    "less": "1.7.5",
-    "uglify-js": "2.4.13",
-    "cssmin": "0.4.1",
-    "jshint": "2.1.10"
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "bootstrap": "^3.3.6",
+    "clean-webpack-plugin": "^0.1.9",
+    "css-loader": "^0.23.1",
+    "cssmin": "^0.4.1",
+    "exports-loader": "^0.6.3",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "feature": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "form-serialize": "^0.7.1",
+    "imagesloaded": "^4.1.0",
+    "imports-loader": "^0.6.5",
+    "jquery": "^3.0.0",
+    "jshint": "^2.1.10",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "masonry-layout": "^4.1.0",
+    "photoswipe": "^4.1.1",
+    "slick-carousel": "^1.6.0",
+    "style-loader": "^0.13.1",
+    "superagent": "^2.0.0",
+    "tingle.js": "^0.7.0",
+    "uglify-js": "^2.4.13",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "webpack-bundle-tracker": "0.0.93"
+  },
+  "devDependencies": {
+    "progress-bar-webpack-plugin": "^1.8.0",
+    "webpack-bundle-tracker": "0.0.93",
+    "webpack-merge": "^0.14.0",
+    "webpack-validator": "^2.1.3"
+  },
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack -w -v"
   }
 }

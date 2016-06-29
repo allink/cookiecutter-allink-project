@@ -73,10 +73,7 @@ DEFAULT_FILE_STORAGE = 'allink_essentials.storage.lossless_image_compress_storag
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
 )
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # ===========================
 # = Django-specific Modules =
@@ -84,7 +81,6 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
-    'pipeline.middleware.MinifyHTMLMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,6 +124,8 @@ CONTEXT_PROCESSORS = [
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'universe.context_processors.config',
+    'universe.context_processors.sortable_menu',
 ]
 
 TEMPLATES = [
@@ -162,13 +160,15 @@ INSTALLED_APPS = (
     'feincms.module.page',
     'allink_essentials',
     'allink_essentials.in_footer',
-    'pipeline',
     'mptt',
     'robots',
     'allink_essentials.analytics',
     'debug_toolbar',
     'raven.contrib.django.raven_compat',
     'admin_sso',
+    'sorl.thumbnail',
+    'solo.apps.SoloAppConfig',
+    'webpack_loader',
     # 'djcelery',
     '{{ cookiecutter.project_name }}',
 )
@@ -240,56 +240,6 @@ FEINCMS_TINYMCE_INIT_CONTEXT = {
 FEINCMS_RICHTEXT_INIT_CONTEXT = FEINCMS_TINYMCE_INIT_CONTEXT
 FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
 
-# =====================
-# = Pipeline settings =
-# =====================
-
-
-PIPELINE = {
-    'PIPELINE_ENABLED': False,
-    'JAVASCRIPT': {
-        'main': {
-            'source_filenames': (
-                'lib/jquery-1.11.0.js',
-                'lib/jquery.sticky.js',
-                'lib/bootstrap/js/transition.js',
-                'lib/bootstrap/js/dropdown.js',
-                'lib/bootstrap/js/collapse.js',
-                'lib/modernizr-custom.js',
-                'javascript/lib.js',
-                'javascript/main.js',
-            ),
-            'output_filename': 'js/main.js',
-        },
-        'ie9': {
-            'source_filenames': (
-                'lib/jquery.placeholder.js',
-                'javascript/ie9.js',
-            ),
-            'output_filename': 'js/ie9.js',
-        },
-    },
-    'STYLESHEETS': {
-        'main': {
-            'source_filenames': (
-                'icomoon/style.css',
-                'lib/slick/slick.css',
-                'stylesheets/base.less',
-            ),
-            'output_filename': 'css/main.css',
-            'variant': 'datauri',
-        },
-    },
-    'COMPILERS': (
-        'pipeline.compilers.less.LessCompiler',
-    ),
-    'LESS_BINARY': os.path.join(BASE_DIR, 'node_modules', '.bin', 'lessc'),
-    'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
-    'CSSMIN_BINARY': os.path.join(BASE_DIR, 'node_modules', '.bin', 'cssmin'),
-    'JS_COMPRESSOR': 'pipeline.compressors.uglifyjs.UglifyJSCompressor',
-    'UGLIFYJS_BINARY': os.path.join(BASE_DIR, 'node_modules', '.bin', 'uglifyjs'),
-}
-
 # ==========
 # = Celery =
 # ==========
@@ -313,6 +263,8 @@ CELERY_ENABLE_UTC = True
 
 DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID', None)
 DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET', None)
+
+THUMBNAIL_ALTERNATIVE_RESOLUTIONS = [2]
 
 # GOOGLE_ANALYTICS_ID = ""
 GOOGLE_TAG_MANAGER_ID = ""
