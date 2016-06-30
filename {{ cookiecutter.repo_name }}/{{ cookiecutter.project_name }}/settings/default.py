@@ -170,6 +170,9 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'solo.apps.SoloAppConfig',
     'webpack_loader',
+    'universe',
+    'universe.locations',
+    'styleguide',
     # 'djcelery',
     '{{ cookiecutter.project_name }}',
 )
