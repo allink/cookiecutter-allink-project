@@ -21,3 +21,4 @@ sorl-thumbnail
 django-picklefield
 django-widget-tweaks
 django-import-export
+django-htmlmin
