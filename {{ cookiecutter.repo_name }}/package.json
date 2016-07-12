@@ -29,7 +29,9 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "webpack-bundle-tracker": "0.0.93"
+    "webpack-bundle-tracker": "0.0.93",
+    "softpage": "git+git@github.com:allink/softpage.git#v0.1.1",
+    "gallery-grid": "git+git@github.com:allink/carousel-widget.git#v0.2.0"
   },
   "devDependencies": {
     "progress-bar-webpack-plugin": "^1.8.0",
