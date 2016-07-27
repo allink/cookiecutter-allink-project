@@ -17,7 +17,7 @@ django-dotenv
 django-getenv
 django-webpack-loader
 django-solo
-sorl-thumbnail
+git+git://github.com/mariocesar/sorl-thumbnail@v12.3
 django-picklefield
 django-widget-tweaks
 django-import-export
