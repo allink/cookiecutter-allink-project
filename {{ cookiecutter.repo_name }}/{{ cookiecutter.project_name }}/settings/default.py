@@ -141,6 +141,7 @@ TEMPLATE_LOADERS = (
 # ===============
 
 INSTALLED_APPS = (
+    'modeltranslation',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
@@ -160,6 +161,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'raven.contrib.django',
     'admin_sso',
+    'solo.apps.SoloAppConfig',
     # 'djcelery',
     '{{ cookiecutter.project_name }}',
 )

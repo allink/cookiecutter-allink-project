@@ -16,3 +16,5 @@ dj-database-url
 django-cache-url
 django-dotenv
 django-getenv
+django-modeltranslation
+django-solo
