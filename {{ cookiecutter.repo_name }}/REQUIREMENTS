@@ -15,6 +15,7 @@ dj-database-url
 django-cache-url==0.8.0
 django-dotenv
 django-getenv
+<<<<<<< HEAD
 django-webpack-loader
 django-solo
 git+git://github.com/mariocesar/sorl-thumbnail@v12.3
@@ -22,3 +23,7 @@ django-picklefield
 django-widget-tweaks
 django-import-export
 django-htmlmin
+=======
+django-modeltranslation
+django-solo
+>>>>>>> develop
