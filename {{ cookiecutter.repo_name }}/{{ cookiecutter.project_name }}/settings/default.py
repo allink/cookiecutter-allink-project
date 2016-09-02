@@ -1,7 +1,9 @@
 import os
+import re
 from getenv import env
 import dj_database_url
 import django_cache_url
+# from celery.task.schedules import crontab
 
 # ===================
 # = Global Settings =
@@ -15,7 +17,7 @@ ALLOWED_HOSTS = ["*"]
 LANGUAGE_CODE = 'de'
 LANGUAGES = (
     ('de', 'German'),
-    ('en', 'English'),
+    # ('en', 'English'),
     # ('fr', 'French'),
 )
 TIME_ZONE = 'Europe/Zurich'
@@ -24,6 +26,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 ATOMIC_REQUESTS = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 
 # ===============================
 # = Databases, Caches, Sessions =
@@ -71,18 +74,14 @@ DEFAULT_FILE_STORAGE = 'allink_essentials.storage.lossless_image_compress_storag
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
 )
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # ===========================
 # = Django-specific Modules =
 # ===========================
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
-    'pipeline.middleware.MinifyHTMLMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,7 +89,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+    'htmlmin.middleware.HtmlMinifyMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware',
+]
 
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.versions.VersionsPanel',
@@ -112,16 +113,13 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
+INTERNAL_IPS = ['127.0.0.1']
 
 # =============
 # = Templates =
 # =============
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, '{{ cookiecutter.project_name }}', 'templates'),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
+CONTEXT_PROCESSORS = [
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
@@ -129,12 +127,25 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-)
+    'universe.context_processors.config',
+    'universe.context_processors.sortable_menu',
+]
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': False,
+        'DIRS': [os.path.join(BASE_DIR, 'meinau', 'templates')],
+        'OPTIONS': {
+            'debug': True,
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader'
+            ],
+            'context_processors': CONTEXT_PROCESSORS
+        }
+    },
+]
 
 # ===============
 # = Django Apps =
@@ -151,17 +162,21 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'feincms',
     'feincms.module.page',
-    'feincms.module.medialibrary',
     'allink_essentials',
     'allink_essentials.in_footer',
-    'pipeline',
     'mptt',
     'robots',
     'allink_essentials.analytics',
     'debug_toolbar',
-    'raven.contrib.django',
+    'raven.contrib.django.raven_compat',
     'admin_sso',
+    'sorl.thumbnail',
     'solo.apps.SoloAppConfig',
+    'webpack_loader',
+    'universe',
+    'universe.locations',
+    'universe.blog',
+    'styleguide',
     # 'djcelery',
     '{{ cookiecutter.project_name }}',
 )
@@ -197,7 +212,7 @@ LOGGING = {
     'handlers': {
         'sentry': {
             'level': 'WARNING',
-            'class': 'raven.contrib.django.handlers.SentryHandler',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
             'filters': ['require_debug_false', 'skip_unreadable_posts'],
         },
         'console': {
@@ -226,60 +241,12 @@ LOGGING = {
 
 FEINCMS_ADMIN_MEDIA = '/static/feincms/'
 FEINCMS_TINYMCE_INIT_CONTEXT = {
-    'TINYMCE_JS_URL': os.path.join(STATIC_URL, 'lib/tiny_mce/tiny_mce.js'),
-    'TINYMCE_CONTENT_CSS_URL': os.path.join(STATIC_URL, 'lib/tiny_mce.css'),
+    'TINYMCE_JS_URL': os.path.join(STATIC_URL, 'lib/tinymce/tinymce.min.js'),
     'TINYMCE_LINK_LIST_URL': '/admin/tiny_mce_links.js',
     'TINYMCE_EXTERNAL_IMAGE_LIST_URL': None
 }
 FEINCMS_RICHTEXT_INIT_CONTEXT = FEINCMS_TINYMCE_INIT_CONTEXT
 FEINCMS_RICHTEXT_INIT_TEMPLATE = 'admin/tinymce_config.html'
-
-# =====================
-# = Pipeline settings =
-# =====================
-
-PIPELINE_CSS = {
-    'main': {
-        'source_filenames': (
-            'lib/bootstrap-3.1.1/less/bootstrap.less',
-            'stylesheets/base.less',
-            'stylesheets/layout.less',
-        ),
-        'output_filename': 'css/main.css',
-        'variant': 'datauri',
-    },
-}
-
-PIPELINE_JS = {
-    'main': {
-        'source_filenames': (
-            'lib/jquery-1.11.0.js',
-            'lib/jquery.sticky.js',
-            'lib/bootstrap-3.1.1/js/transition.js',
-            'lib/bootstrap-3.1.1/js/dropdown.js',
-            'lib/bootstrap-3.1.1/js/collapse.js',
-            'javascript/main.js',
-        ),
-        'output_filename': 'js/main.js',
-    },
-    'ie9': {
-        'source_filenames': (
-            'lib/jquery.placeholder.js',
-            'javascript/ie9.js',
-        ),
-        'output_filename': 'js/ie9.js',
-    }
-}
-
-PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
-)
-
-PIPELINE_LESS_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'lessc')
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
-PIPELINE_CSSMIN_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'cssmin')
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
-PIPELINE_UGLIFYJS_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'uglifyjs')
 
 # ==========
 # = Celery =
@@ -290,10 +257,14 @@ CELERYBEAT_SCHEDULE = {
     #     'task': 'tasks.print',
     #     'schedule': timedelta(seconds=30)
     # },
+    # 'detect_overdue_invoices': {
+    #     'task': 'oscar_apps.order.tasks.invoice_overdue_task',
+    #     'schedule': crontab(hour=3, minute=13),
+    # },
 }
 
 BROKER_URL = env('BROKER_URL', None)
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', None)
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', 'rpc://')
 CELERYD_CONCURRENCY = env('CELERYD_CONCURRENCY', 1)
 CELERY_SEND_EVENTS = False
 CELERY_ENABLE_UTC = True
@@ -305,9 +276,11 @@ CELERY_ENABLE_UTC = True
 DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID', None)
 DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = env('DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET', None)
 
-GOOGLE_ANALYTICS_ID = ""
+THUMBNAIL_ALTERNATIVE_RESOLUTIONS = [2]
 
-import re
+# GOOGLE_ANALYTICS_ID = ""
+GOOGLE_TAG_MANAGER_ID = ""
+
 IGNORABLE_404_URLS = (
     re.compile(r'^/cgi-bin/'),
     re.compile(r'\.php$'),
