@@ -175,6 +175,7 @@ INSTALLED_APPS = (
     'webpack_loader',
     'universe',
     'universe.locations',
+    'universe.blog',
     'styleguide',
     # 'djcelery',
     '{{ cookiecutter.project_name }}',

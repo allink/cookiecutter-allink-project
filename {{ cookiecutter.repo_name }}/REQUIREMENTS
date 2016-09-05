@@ -23,3 +23,4 @@ django-widget-tweaks
 django-import-export
 django-htmlmin
 django-modeltranslation
+django-orderable==4.0.4
