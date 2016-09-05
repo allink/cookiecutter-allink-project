@@ -173,6 +173,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'solo.apps.SoloAppConfig',
     'webpack_loader',
+    'orderable',
     'universe',
     'universe.locations',
     'universe.blog',
