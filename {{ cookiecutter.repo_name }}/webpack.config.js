@@ -6,6 +6,7 @@ const validate = require('webpack-validator');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const parts = require('./webpack/lib');
 
@@ -26,7 +27,7 @@ const common = {
         styleguide: PATHS.styleguide
     },
     output: {
-    	path: path.resolve(PATHS.build),
+        path: path.resolve(PATHS.build),
         publicPath: '/static/build/',
     },
     module: {
@@ -39,11 +40,11 @@ const common = {
               plugins: ['add-module-exports']
             }
             }, {
-            	test: /\.less?$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
+                test: /\.less?$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less-loader')
             }, {
-            	test: /\.css?$/,
-            	loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+                test: /\.css?$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
             },
             {test: /\.(gif|png)$/, loader: 'url-loader?limit=100000' },
             {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
@@ -60,12 +61,18 @@ const common = {
             path.join(__dirname, './universe/static/universe/js')
         ]
     },
+    postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
     plugins: [
         new ProgressBarPlugin(),
         new CleanWebpackPlugin(['build'], {
             root: STATIC_ROOT,
             verbose: true,
             dry: false
+        }),
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery',
+            jquery: 'jquery'
         })
     ]
 };
