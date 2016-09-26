@@ -5,10 +5,13 @@
 /media
 /static
 /node_modules
-/compiled_static
 /webstats
 *.pyc
 *.sqlite
 *.mo
 *.pid
 .env
+*.sublime-project
+*.sublime-workspace
+npm-debug.log
+.idea
